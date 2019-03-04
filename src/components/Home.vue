@@ -1,14 +1,11 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    Clicked: {{ $store.state.count }} times, count is {{ evenOrOdd }}.
-    <button @click="increment">+</button>
     <Step1/>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import Step1 from './Step1'
 
 export default {
@@ -18,16 +15,9 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'homework'
     }
-  },
-  computed: mapGetters([
-    'evenOrOdd'
-  ]),
-  methods: mapActions([
-    'increment',
-    'decrement'
-  ])
+  }
 }
 </script>
 

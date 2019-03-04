@@ -3,44 +3,22 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const state = {
-  count: 0
-}
-
-const mutations = {
-  increment (state) {
-    state.count++
+export default new Vuex.Store({
+  state: {
+    cleanStyleList: [
+      {id: 1, label: '스팀청소', checked: false},
+      {id: 2, label: '진공청소기로 청소', checked: false},
+      {id: 3, label: '쓰레기 비우기', checked: false}
+    ]
   },
-  decrement (state) {
-    state.count--
-  }
-}
-
-const actions = {
-  increment: ({ commit }) => commit('increment'),
-  decrement: ({ commit }) => commit('decrement'),
-  incrementIfOdd ({ commit, state }) {
-    if ((state.count + 1) % 2 === 0) {
-      commit('increment')
+  mutations: {
+    updateCleanStyleList (state, items) {
+      state.cleanStyleList = items
     }
   },
-  incrementAsync ({ commit }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('increment')
-        resolve()
-      }, 1000)
-    })
+  actions: {
+    updateCleanStyleList ({commit}, items) {
+      commit('updateCleanStyleList', items)
+    }
   }
-}
-
-const getters = {
-  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
-}
-
-export default new Vuex.Store({
-  state,
-  getters,
-  actions,
-  mutations
 })
