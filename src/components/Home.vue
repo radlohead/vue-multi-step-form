@@ -2,20 +2,23 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <Step1/>
+    <StepMenu/>
   </div>
 </template>
 
 <script>
 import Step1 from './Step1'
+import StepMenu from './StepMenu'
 
 export default {
   name: 'Home',
   components: {
-    Step1
+    Step1,
+    StepMenu
   },
   data () {
     return {
-      msg: 'homework'
+      msg: 'vue.js'
     }
   }
 }
