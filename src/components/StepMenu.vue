@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   name: 'StepMenu',
-  methods: mapActions([
-    'handleNext'
-  ])
+  methods: {
+    handleNext (e) {
+      this.$store.commit('handleNext')
+    }
+  }
 }
 </script>

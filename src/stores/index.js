@@ -14,13 +14,9 @@ const store = new Vuex.Store({
   },
   mutations: {
     handleNext (state) {
-      // let cleanStyleListArrState = []
-      // for (const a of state.cleanStyleList) cleanStyleListArrState.push(a.checked)
-      // cleanStyleListArrState.some(v => v) ? state.step = 2 : state.step = 1
-      // let idList = []
-      // for (const a of state.form.items) idList.push(a.id)
-      // console.log(idList.some(v => v >= 1 && v <= 2))
-      // console.log('handleNext', JSON.parse(JSON.stringify(state)).step)
+      let idList = []
+      for (const a of state.form.items) idList.push(a.id)
+      idList.some(v => v >= 1 && v <= 3) ? state.step = 2 : state.step = 1
     },
     updateCheckbox (state, items) {
       if (items.checked) {
@@ -36,14 +32,6 @@ const store = new Vuex.Store({
         }
       }
       console.log('updateCheckbox', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
-    }
-  },
-  actions: {
-    handleNext ({commit}, items) {
-      commit('handleNext', items)
-    },
-    updateMessage (state, items) {
-      console.log('updateMessage', JSON.parse(JSON.stringify(state.form)), items)
     }
   }
 })
