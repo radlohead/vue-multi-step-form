@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ title }}</h1>
     <Step1/>
     <StepMenu/>
   </div>
@@ -9,6 +9,7 @@
 <script>
 import Step1 from './Step1'
 import StepMenu from './StepMenu'
+import input from '../assets/input'
 
 export default {
   name: 'Home',
@@ -18,7 +19,7 @@ export default {
   },
   data () {
     return {
-      msg: 'vue.js'
+      title: input.title
     }
   }
 }
