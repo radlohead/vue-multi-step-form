@@ -18,7 +18,9 @@ const store = new Vuex.Store({
       for (const a of state.form.items) idList.push(a.id)
       idList.some(v => v >= 1 && v <= 3) ? state.step = 2 : state.step = 1
       idList.some(v => v >= 4 && v <= 5) ? state.step = 3 : state.step = 2
-      console.log(JSON.parse(JSON.stringify(state.form.items)), idList)
+      if (!idList[idList.length - 1]) state.step = 4
+      // console.log(idList.some(v => v === undefined))
+      console.log('handleNext', JSON.parse(JSON.stringify(state.form.items)), idList[idList.length - 1])
     },
     updateCheckbox (state, items) {
       if (items.checked) {
@@ -65,6 +67,18 @@ const store = new Vuex.Store({
         }
       }
       console.log('updateCleanStyleText', JSON.parse(JSON.stringify(state.form.items)), items.id, items.value)
+    },
+    updateSelect (state, items) {
+      for (const i of state.form.items.keys()) {
+        if (Number(state.form.items[i].id) >= 6 && Number(state.form.items[i].id) <= 8) {
+          state.form.items.splice(i, 1)
+        }
+      }
+      state.form.items.push({
+        id: Number(items.options[items.options.selectedIndex].id),
+        text: items.options[items.options.selectedIndex].text
+      })
+      console.log('updateSelect', JSON.parse(JSON.stringify(state.form.items)), items.options[items.options.selectedIndex].text)
     }
   }
 })
