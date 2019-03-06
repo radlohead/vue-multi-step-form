@@ -17,6 +17,8 @@ const store = new Vuex.Store({
       let idList = []
       for (const a of state.form.items) idList.push(a.id)
       idList.some(v => v >= 1 && v <= 3) ? state.step = 2 : state.step = 1
+      idList.some(v => v >= 4 && v <= 5) ? state.step = 3 : state.step = 2
+      console.log(JSON.parse(JSON.stringify(state.form.items)), idList)
     },
     updateCheckbox (state, items) {
       if (items.checked) {
@@ -48,13 +50,21 @@ const store = new Vuex.Store({
       console.log('updateRadio', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
     },
     updateCleanStyleText (state, items) {
-      if (!state.form.items.length) state.form.items.push({ answer: items.value })
+      let count = 0
+      for (const a of state.form.items) {
+        if (a.id) ++count
+        if (state.form.items.length === count) state.form.items.push({ answer: items.value })
+        console.log(state.form.items.length, count)
+      }
       for (const i of state.form.items.keys()) {
         if (state.form.items[i].id === undefined) {
           state.form.items[i].answer = items.value
         }
+        if (state.form.items[i].id === undefined && !state.form.items[i].answer) {
+          state.form.items.splice(i, 1)
+        }
       }
-      console.log('updateCleanStyleText', JSON.parse(JSON.stringify(state.form)), items.id, items.value)
+      console.log('updateCleanStyleText', JSON.parse(JSON.stringify(state.form.items)), items.id, items.value)
     }
   }
 })

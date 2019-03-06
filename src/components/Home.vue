@@ -3,7 +3,7 @@
     <h1>{{ title }}</h1>
     <Step1 v-if="step() === 1"/>
     <Step2 v-if="step() === 2"/>
-    <Step3/>
+    <Step3 v-if="step() === 3"/>
     <StepMenu/>
   </div>
 </template>
