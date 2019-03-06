@@ -32,6 +32,9 @@ const store = new Vuex.Store({
         }
       }
       console.log('updateCheckbox', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
+    },
+    updateRadio (state, items) {
+      console.log('updateRadio', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
     }
   }
 })
