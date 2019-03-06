@@ -34,6 +34,17 @@ const store = new Vuex.Store({
       console.log('updateCheckbox', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
     },
     updateRadio (state, items) {
+      if (items.checked) {
+        for (const i of state.form.items.keys()) {
+          if (state.form.items[i].id >= 4 && state.form.items[i].id <= 5) {
+            state.form.items.splice(i, 1)
+          }
+        }
+        state.form.items.push({
+          id: Number(items.id),
+          answer: items.value
+        })
+      }
       console.log('updateRadio', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
     }
   }
