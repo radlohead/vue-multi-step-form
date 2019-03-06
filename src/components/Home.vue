@@ -3,6 +3,7 @@
     <h1>{{ title }}</h1>
     <Step1 v-if="step() === 1"/>
     <Step2 v-if="step() === 2"/>
+    <Step3/>
     <StepMenu/>
   </div>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import Step1 from './Step1'
 import Step2 from './Step2'
+import Step3 from './Step3'
 import StepMenu from './StepMenu'
 import input from '../assets/input'
 
@@ -18,6 +20,7 @@ export default {
   components: {
     Step1,
     Step2,
+    Step3,
     StepMenu
   },
   data () {

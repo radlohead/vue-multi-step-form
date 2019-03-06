@@ -46,6 +46,15 @@ const store = new Vuex.Store({
         })
       }
       console.log('updateRadio', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
+    },
+    updateCleanStyleText (state, items) {
+      if (!state.form.items.length) state.form.items.push({ answer: items.value })
+      for (const i of state.form.items.keys()) {
+        if (state.form.items[i].id === undefined) {
+          state.form.items[i].answer = items.value
+        }
+      }
+      console.log('updateCleanStyleText', JSON.parse(JSON.stringify(state.form)), items.id, items.value)
     }
   }
 })
