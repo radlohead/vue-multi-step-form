@@ -30,6 +30,15 @@ const handleException = (state) => {
         case 1:
           alert('청소 스타일을 체크해 주세요.')
           break
+        case 2:
+          alert('청소 시간을 체크해 주세요')
+          break
+        case 3:
+          alert('원하는 청소 스타일을 추가로 입력해 주세요')
+          break
+        case 4:
+          alert('네번째 질문을 선택해 주세요')
+          break
       }
       console.log('exception', state.step, obj.id, currentId)
       return
