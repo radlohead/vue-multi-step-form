@@ -46,6 +46,14 @@ const handleException = (state) => {
   }
 }
 
+const handleSubmit = (state) => {
+  if (state.step === 5) {
+    setTimeout(() => {
+      alert('작성한 폼이 제출되었습니다.')
+    }, 500)
+  }
+}
+
 const store = new Vuex.Store({
   state: {
     step: 1,
@@ -66,6 +74,7 @@ const store = new Vuex.Store({
             if (!cleanTimeFilter[cleanTimeFilter.length - 1]) return
           }
           state.step = obj.itemId + 1
+          handleSubmit(state)
           return
         }
       }
