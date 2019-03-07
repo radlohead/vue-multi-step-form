@@ -16,11 +16,22 @@ const store = new Vuex.Store({
     handleNext (state) {
       let idList = []
       for (const a of state.form.items) idList.push(a.id)
-      idList.some(v => v >= 1 && v <= 3) ? state.step = 2 : state.step = 1
-      idList.some(v => v >= 4 && v <= 5) ? state.step = 3 : state.step = 2
-      if (!idList[idList.length - 1]) state.step = 4
-      // console.log(idList.some(v => v === undefined))
-      console.log('handleNext', JSON.parse(JSON.stringify(state.form.items)), idList[idList.length - 1])
+      const currentId = [idList[idList.length - 1]]
+      switch (state.step) {
+        case 1:
+          if (currentId.some(v => v >= 1 && v <= 3)) state.step = 2
+          break
+        case 2:
+          if (currentId.some(v => v >= 4 && v <= 5)) state.step = 3
+          break
+        case 3:
+          if (!currentId[0]) state.step = 4
+          break
+        case 4:
+          if (currentId.some(v => v >= 6 && v <= 8)) state.step = 5
+          break
+      }
+      console.log('handleNext', JSON.parse(JSON.stringify(state.step)), currentId)
     },
     updateCheckbox (state, items) {
       if (items.checked) {
