@@ -4,6 +4,18 @@ import input from '../assets/input'
 
 Vue.use(Vuex)
 
+const formOptionsId = {
+  1: 2,
+  2: 2,
+  3: 2,
+  4: 3,
+  5: 3,
+  undefined: 4,
+  6: 5,
+  7: 5,
+  8: 5
+}
+
 const store = new Vuex.Store({
   state: {
     step: 1,
@@ -14,24 +26,16 @@ const store = new Vuex.Store({
   },
   mutations: {
     handleNext (state) {
-      let idList = []
+      const idList = []
+      let currentId = null
       for (const a of state.form.items) idList.push(a.id)
-      const currentId = [idList[idList.length - 1]]
-      switch (state.step) {
-        case 1:
-          if (currentId.some(v => v >= 1 && v <= 3)) state.step = 2
-          break
-        case 2:
-          if (currentId.some(v => v >= 4 && v <= 5)) state.step = 3
-          break
-        case 3:
-          if (!currentId[0]) state.step = 4
-          break
-        case 4:
-          if (currentId.some(v => v >= 6 && v <= 8)) state.step = 5
-          break
-      }
-      console.log('handleNext', JSON.parse(JSON.stringify(state.step)), currentId)
+      currentId = idList[idList.length - 1]
+      if (!currentId && !idList.length) return
+      state.step = formOptionsId[currentId]
+      console.log('handleNext', JSON.parse(JSON.stringify(state.step)))
+    },
+    handleBack (state) {
+      console.log('handleBack', state.step, input.items[0].options[0].id)
     },
     updateCheckbox (state, items) {
       if (items.checked) {
