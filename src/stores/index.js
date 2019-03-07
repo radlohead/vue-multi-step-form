@@ -4,16 +4,21 @@ import input from '../assets/input'
 
 Vue.use(Vuex)
 
-const formOptionsId = {
-  1: 2,
-  2: 2,
-  3: 2,
-  4: 3,
-  5: 3,
-  undefined: 4,
-  6: 5,
-  7: 5,
-  8: 5
+const formOptionsId = () => {
+  let optionsId = []
+  for (const obj of Array.from(input.items)) {
+    for (const i of obj.options.keys()) {
+      optionsId.push({
+        itemId: obj.itemId,
+        id: obj.options[i].id
+      })
+    }
+  }
+  optionsId.push({
+    itemId: 3,
+    id: undefined
+  })
+  return optionsId
 }
 
 const store = new Vuex.Store({
@@ -31,11 +36,11 @@ const store = new Vuex.Store({
       for (const a of state.form.items) idList.push(a.id)
       currentId = idList[idList.length - 1]
       if (!currentId && !idList.length) return
-      state.step = formOptionsId[currentId]
-      console.log('handleNext', JSON.parse(JSON.stringify(state.step)))
+      // state.step = formOptionsId[currentId]
+      console.log('handleNext', JSON.parse(JSON.stringify(state.step)), currentId)
     },
     handleBack (state) {
-      console.log('handleBack', state.step, input.items[0].options[0].id)
+      console.log('handleBack', state.step, formOptionsId())
     },
     updateCheckbox (state, items) {
       if (items.checked) {
