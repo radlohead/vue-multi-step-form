@@ -21,6 +21,22 @@ const formOptionsId = () => {
   return optionsId
 }
 
+const handleException = (state) => {
+  let currentId = null
+  for (const a of state.form.items) currentId = a.id
+  for (const obj of formOptionsId()) {
+    if (obj.itemId === state.step && obj.id !== currentId) {
+      switch (state.step) {
+        case 1:
+          alert('청소 스타일을 체크해 주세요.')
+          break
+      }
+      console.log('exception', state.step, obj.id, currentId)
+      return
+    }
+  }
+}
+
 const store = new Vuex.Store({
   state: {
     step: 1,
@@ -32,14 +48,20 @@ const store = new Vuex.Store({
   mutations: {
     handleNext (state) {
       let currentId = null
+      const cleanTimeTextArr = input.items[1].options.map(v => v.text)
       for (const a of state.form.items) currentId = a.id
       for (const obj of formOptionsId()) {
         if (obj.itemId === state.step && obj.id === currentId) {
+          if (state.step === 2) {
+            const cleanTimeFilter = state.form.items.map(v => cleanTimeTextArr.some(a => a === v.answer))
+            if (!cleanTimeFilter[cleanTimeFilter.length - 1]) return
+          }
           state.step = obj.itemId + 1
           return
         }
       }
-      console.log('handleNext', JSON.parse(JSON.stringify(state.form)), currentId)
+      handleException(state)
+      // console.log('handleNext', JSON.parse(JSON.stringify(state.form)), state.step, currentId)
     },
     handleBack (state) {
       state.step -= 1
