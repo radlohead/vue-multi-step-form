@@ -31,13 +31,15 @@ const store = new Vuex.Store({
   },
   mutations: {
     handleNext (state) {
-      const idList = []
       let currentId = null
-      for (const a of state.form.items) idList.push(a.id)
-      currentId = idList[idList.length - 1]
-      if (!currentId && !idList.length) return
-      // state.step = formOptionsId[currentId]
-      console.log('handleNext', JSON.parse(JSON.stringify(state.step)), currentId)
+      for (const a of state.form.items) currentId = a.id
+      for (const obj of formOptionsId()) {
+        if (obj.itemId === state.step && obj.id === currentId) {
+          state.step = obj.itemId + 1
+          return
+        }
+      }
+      // console.log('handleNext', JSON.parse(JSON.stringify(state.step)), currentId)
     },
     handleBack (state) {
       console.log('handleBack', state.step, formOptionsId())
