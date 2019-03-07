@@ -9,7 +9,7 @@
       name='next'
       :disabled="$store.state.step === 5"
       @click="handleNext"
-    >Next</button>
+    >{{ (this.$store.state.step !== 4 && this.$store.state.step !== 5) ? 'Next' : 'Submit' }}</button>
     <button
       name='restart'
       :disabled="$store.state.step !== 5"
