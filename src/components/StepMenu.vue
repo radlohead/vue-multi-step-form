@@ -15,7 +15,6 @@
       :disabled="$store.state.step !== 5"
       @click="handleRestart"
     >Restart</button>
-    <div>step: {{ $store.state.step }}</div>
   </section>
 </template>
 
