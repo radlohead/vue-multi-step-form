@@ -42,6 +42,7 @@ const store = new Vuex.Store({
       // console.log('handleNext', JSON.parse(JSON.stringify(state.step)), currentId)
     },
     handleBack (state) {
+      state.step -= 1
       console.log('handleBack', state.step, formOptionsId())
     },
     updateCheckbox (state, items) {
