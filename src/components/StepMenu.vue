@@ -13,6 +13,7 @@
     <button
       name='restart'
       :disabled="$store.state.step !== 5"
+      @click="handleRestart"
     >Restart</button>
     <div>step: {{ $store.state.step }}</div>
   </section>
@@ -27,6 +28,9 @@ export default {
     },
     handleBack (e) {
       this.$store.commit('handleBack')
+    },
+    handleRestart (e) {
+      this.$store.commit('handleRestart')
     }
   }
 }

@@ -76,6 +76,10 @@ const store = new Vuex.Store({
       state.step -= 1
       console.log('handleBack', state.step, formOptionsId())
     },
+    handleRestart (state) {
+      state.form.items = []
+      state.step = 1
+    },
     updateCheckbox (state, items) {
       if (items.checked) {
         state.form.items.push({
