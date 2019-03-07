@@ -39,7 +39,7 @@ const store = new Vuex.Store({
           return
         }
       }
-      // console.log('handleNext', JSON.parse(JSON.stringify(state.step)), currentId)
+      console.log('handleNext', JSON.parse(JSON.stringify(state.form)), currentId)
     },
     handleBack (state) {
       state.step -= 1
@@ -61,18 +61,29 @@ const store = new Vuex.Store({
       console.log('updateCheckbox', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
     },
     updateRadio (state, items) {
-      if (items.checked) {
-        for (const i of state.form.items.keys()) {
-          if (state.form.items[i].id >= 4 && state.form.items[i].id <= 5) {
-            state.form.items.splice(i, 1)
-          }
+      for (const i of state.form.items.keys()) {
+        if (state.form.items[i].id >= 4 && state.form.items[i].id <= 5) {
+          state.form.items.splice(i, 1)
         }
-        state.form.items.push({
-          id: Number(items.id),
-          answer: items.value
-        })
       }
-      console.log('updateRadio', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
+      let exceptionText = []
+      for (const a of input.items) {
+        if (a.itemId === 2) {
+          for (const i of a.options.keys()) exceptionText.push(a.options[i].text)
+        }
+      }
+      const findText = Array.from(state.form.items).find((v, i) => {
+        if (state.form.items[i]) {
+          for (const obj of exceptionText) return obj === v.answer
+        }
+      })
+      const findIndex = state.form.items.findIndex(v => v === findText)
+      if (findIndex > -1) state.form.items.splice(findIndex, 1)
+      state.form.items.push({
+        id: Number(items.id),
+        answer: items.value
+      })
+      console.log('updateRadio', JSON.parse(JSON.stringify(state.form.items)), findIndex)
     },
     updateCleanStyleText (state, items) {
       let count = 0
