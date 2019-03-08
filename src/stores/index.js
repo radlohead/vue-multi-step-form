@@ -68,6 +68,13 @@ const answerCheck = (state, num, answerCheckIndex) => {
   if (state.step === num) return !cleanTimeFilter
 }
 
+const formTypeName = {
+  checkbox: 1,
+  radio: 2,
+  text: 3,
+  selectbox: 4
+}
+
 const formTypeId = () => {
   let result = []
   for (const obj of Array.from(input.items)) {
@@ -81,7 +88,11 @@ const formTypeId = () => {
   console.log(result)
   return result
 }
-formTypeId()
+
+const formTypeIndex = (typeName) => {
+  const findIndex = formTypeId().findIndex(v => v.formType === formTypeName[typeName])
+  return findIndex
+}
 
 const store = new Vuex.Store({
   state: {
@@ -172,16 +183,22 @@ const store = new Vuex.Store({
       console.log('updateCleanStyleText', JSON.parse(JSON.stringify(state.form.items)), items.id, items.value)
     },
     updateSelect (state, items) {
+      const idArr = formTypeId()[formTypeIndex('selectbox')].id
+      const firstId = idArr[0]
+      const lastId = idArr[idArr.length - 1]
+      const selectId = Number(items.options[items.options.selectedIndex].id)
+      const selectText = items.options[items.options.selectedIndex].text
+
       for (const i of state.form.items.keys()) {
-        if (Number(state.form.items[i].id) >= 6 && Number(state.form.items[i].id) <= 8) {
+        if (Number(state.form.items[i].id) >= firstId && Number(state.form.items[i].id) <= lastId) {
           state.form.items.splice(i, 1)
         }
       }
       state.form.items.push({
-        id: Number(items.options[items.options.selectedIndex].id),
-        text: items.options[items.options.selectedIndex].text
+        id: selectId,
+        text: selectText
       })
-      console.log('updateSelect', JSON.parse(JSON.stringify(state.form.items)), items.options[items.options.selectedIndex].text)
+      console.log('updateSelect', JSON.parse(JSON.stringify(state.form.items)))
     }
   }
 })
