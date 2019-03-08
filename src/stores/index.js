@@ -4,6 +4,16 @@ import input from '../assets/input'
 
 Vue.use(Vuex)
 
+const optionsNotId = (optionsId, arrNum) => {
+  for (const num of arrNum) {
+    optionsId.push({
+      itemId: num,
+      id: undefined
+    })
+  }
+  return optionsId
+}
+
 const formOptionsId = () => {
   let optionsId = []
   for (const obj of Array.from(input.items)) {
@@ -14,10 +24,7 @@ const formOptionsId = () => {
       })
     }
   }
-  optionsId.push({
-    itemId: 3,
-    id: undefined
-  })
+  optionsNotId(optionsId, [3])
   return optionsId
 }
 
@@ -50,7 +57,7 @@ const handleSubmit = (state) => {
   if (state.step === 5) {
     setTimeout(() => {
       alert('작성한 폼이 제출되었습니다.')
-    }, 500)
+    }, 700)
   }
 }
 
