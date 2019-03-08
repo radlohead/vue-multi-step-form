@@ -61,18 +61,20 @@ const handleSubmit = (state) => {
   }
 }
 
-const answerCheck = (state, num, answerCheckIndex) => {
-  const cleanTimeTextArr = input.items[answerCheckIndex].options.map(v => v.text)
-  const cleanTimeFilter = state.form.items.some(v => cleanTimeTextArr.some(a => a === v.answer))
-
-  if (state.step === num) return !cleanTimeFilter
-}
-
 const formTypeName = {
   checkbox: 1,
   radio: 2,
   text: 3,
   selectbox: 4
+}
+
+const answerCheck = (state, formTypeNum, answerCheckIndex) => {
+  const cleanTimeTextArr = input.items[answerCheckIndex].options.map(v => v.text)
+  const cleanTimeFilter = state.form.items.some(v => cleanTimeTextArr.some(a => a === v.answer))
+
+  if (state.step !== formTypeNum) return false
+  if (!cleanTimeFilter) handleException(state)
+  return !cleanTimeFilter
 }
 
 const formTypeId = () => {
@@ -85,13 +87,43 @@ const formTypeId = () => {
       id: optionsId
     })
   }
-  console.log(result)
   return result
 }
 
 const formTypeIndex = (typeName) => {
   const findIndex = formTypeId().findIndex(v => v.formType === formTypeName[typeName])
   return findIndex
+}
+
+const formIdDuplication = (state, formTypeName) => {
+  let exceptionText = []
+  for (const obj of input.items) {
+    if (obj.itemId === formTypeName) {
+      for (const i of obj.options.keys()) exceptionText.push(obj.options[i].text)
+    }
+  }
+  const findText = Array.from(state.form.items).find((v, i) => {
+    if (state.form.items[i]) {
+      for (const obj of exceptionText) return obj === v.answer
+    }
+  })
+  const findIndex = state.form.items.findIndex(v => v === findText)
+  if (findIndex > -1) state.form.items.splice(findIndex, 1)
+  return state
+}
+
+const stepIncrement = (state) => {
+  let currentId = null
+
+  for (const a of state.form.items) currentId = a.id
+  for (const obj of formOptionsId()) {
+    if (obj.itemId === state.step && obj.id === currentId) {
+      if (answerCheck(state, formTypeName['radio'], 1)) return
+      state.step = obj.itemId + 1
+      handleSubmit(state)
+      return true
+    }
+  }
 }
 
 const store = new Vuex.Store({
@@ -104,18 +136,9 @@ const store = new Vuex.Store({
   },
   mutations: {
     handleNext (state) {
-      let currentId = null
-      for (const a of state.form.items) currentId = a.id
-      for (const obj of formOptionsId()) {
-        if (obj.itemId === state.step && obj.id === currentId) {
-          if (answerCheck(state, 2, 1)) return
-          state.step = obj.itemId + 1
-          handleSubmit(state)
-          return
-        }
-      }
-      handleException(state)
-      // console.log('handleNext', JSON.parse(JSON.stringify(state.form)), state.step, currentId)
+      if (stepIncrement(state)) return
+      else handleException(state)
+      console.log('handleNext', JSON.parse(JSON.stringify(state.form)), state.step)
     },
     handleBack (state) {
       state.step -= 1
@@ -141,41 +164,31 @@ const store = new Vuex.Store({
       console.log('updateCheckbox', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
     },
     updateRadio (state, items) {
+      const idArr = formTypeId()[formTypeIndex('radio')].id
+      const firstId = idArr[1]
+      const lastId = idArr[idArr.length - 1]
+
       for (const i of state.form.items.keys()) {
-        if (state.form.items[i].id >= 4 && state.form.items[i].id <= 5) {
+        if (state.form.items[i].id >= firstId && state.form.items[i].id <= lastId) {
           state.form.items.splice(i, 1)
         }
       }
-      let exceptionText = []
-      for (const a of input.items) {
-        if (a.itemId === 2) {
-          for (const i of a.options.keys()) exceptionText.push(a.options[i].text)
-        }
-      }
-      const findText = Array.from(state.form.items).find((v, i) => {
-        if (state.form.items[i]) {
-          for (const obj of exceptionText) return obj === v.answer
-        }
-      })
-      const findIndex = state.form.items.findIndex(v => v === findText)
-      if (findIndex > -1) state.form.items.splice(findIndex, 1)
+
+      formIdDuplication(state, formTypeName['radio'])
       state.form.items.push({
         id: Number(items.id),
         answer: items.value
       })
-      console.log('updateRadio', JSON.parse(JSON.stringify(state.form.items)), findIndex)
+      console.log('updateRadio', JSON.parse(JSON.stringify(state.form.items)))
     },
     updateCleanStyleText (state, items) {
       let count = 0
-      for (const a of state.form.items) {
-        if (a.id) ++count
+      for (const obj of state.form.items) {
+        if (obj.id) ++count
         if (state.form.items.length === count) state.form.items.push({ answer: items.value })
-        console.log(state.form.items.length, count)
       }
       for (const i of state.form.items.keys()) {
-        if (state.form.items[i].id === undefined) {
-          state.form.items[i].answer = items.value
-        }
+        if (state.form.items[i].id === undefined) state.form.items[i].answer = items.value
         if (state.form.items[i].id === undefined && !state.form.items[i].answer) {
           state.form.items.splice(i, 1)
         }
