@@ -68,6 +68,21 @@ const answerCheck = (state, num, answerCheckIndex) => {
   if (state.step === num) return !cleanTimeFilter
 }
 
+const formTypeId = () => {
+  let result = []
+  for (const obj of Array.from(input.items)) {
+    let optionsId = []
+    for (const a of Array.from(obj.options)) optionsId.push(a.id)
+    result.push({
+      formType: obj.formType,
+      id: optionsId
+    })
+  }
+  console.log(result)
+  return result
+}
+formTypeId()
+
 const store = new Vuex.Store({
   state: {
     step: 1,
