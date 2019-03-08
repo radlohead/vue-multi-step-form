@@ -26,8 +26,8 @@ export default {
   data () {
     return {
       firstStep: input.items[0].itemId,
-      lastStep: input.items[input.items.length - 1].itemId,
-      secondToLastStep: input.items[input.items.length - 2].itemId
+      lastStep: input.items[input.items.length - 1].itemId + 1,
+      secondToLastStep: input.items[input.items.length - 1].itemId
     }
   },
   methods: {

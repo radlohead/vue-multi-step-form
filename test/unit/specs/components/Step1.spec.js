@@ -38,10 +38,8 @@ import Step1 from '@/components/Step1'
 
 describe('Step1.vue', () => {
   it('Step1 test', () => {
-    
-
-    // const Constructor = Vue.extend(Step1)
-    // const vm = new Constructor().$mount()
-    // expect(vm.updateCheckbox()).toEqual(1)
+    const Constructor = Vue.extend(Step1)
+    const vm = new Constructor().$mount()
+    expect(vm.updateCheckbox()).toEqual(1)
   })
 })

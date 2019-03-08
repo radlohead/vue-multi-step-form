@@ -8,7 +8,6 @@
           type="checkbox"
           id="1"
           value="스팀청소"
-          :checked="checked"
           @input="updateCheckbox"
         />
       </li>
@@ -18,7 +17,6 @@
           type="checkbox"
           id="2"
           value="진공청소기로 청소"
-          :checked="checked"
           @input="updateCheckbox"
         />
       </li>
@@ -28,7 +26,6 @@
           type="checkbox"
           id="3"
           value="쓰레기 비우기"
-          :checked="checked"
           @input="updateCheckbox"
         />
       </li>
@@ -42,12 +39,6 @@ import input from '../assets/input'
 
 export default {
   name: 'Step1',
-  model: {
-    prop: 'checked'
-  },
-  props: {
-    checked: Boolean
-  },
   data () {
     return {
       title: input.items[0].title

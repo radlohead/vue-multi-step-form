@@ -184,10 +184,10 @@ const store = new Vuex.Store({
       console.log('updateRadio', JSON.parse(JSON.stringify(state.form.items)))
     },
     updateCleanStyleText (state, items) {
-      const valueLength = items.value.replace(/\s/g, '')
+      // const valueLength = items.value.replace(/\s/g, '')
       let count = 0
 
-      if (!valueLength) return
+      // if (!valueLength) return
       for (const obj of state.form.items) {
         if (obj.id) ++count
         if (state.form.items.length === count) state.form.items.push({ answer: items.value })
