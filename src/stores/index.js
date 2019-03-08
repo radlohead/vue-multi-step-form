@@ -56,6 +56,7 @@ const handleException = (state) => {
 const handleSubmit = (state) => {
   if (state.step === 5) {
     setTimeout(() => {
+      console.log(JSON.parse(JSON.stringify(state.form)))
       alert('작성한 폼이 제출되었습니다.')
     }, 700)
   }
@@ -209,7 +210,7 @@ const store = new Vuex.Store({
       }
       state.form.items.push({
         id: selectId,
-        text: selectText
+        answer: selectText
       })
       console.log('updateSelect', JSON.parse(JSON.stringify(state.form.items)))
     }
