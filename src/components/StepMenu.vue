@@ -2,25 +2,34 @@
   <section>
     <button
       name='back'
-      :disabled="$store.state.step === 1 || $store.state.step === 5"
+      :disabled="$store.state.step === firstStep || $store.state.step === lastStep"
       @click="handleBack"
     >Back</button>
     <button
       name='next'
-      :disabled="$store.state.step === 5"
+      :disabled="$store.state.step === lastStep"
       @click="handleNext"
-    >{{ (this.$store.state.step !== 4 && this.$store.state.step !== 5) ? 'Next' : 'Submit' }}</button>
+    >{{ (this.$store.state.step !== secondToLastStep && this.$store.state.step !== lastStep) ? 'Next' : 'Submit' }}</button>
     <button
       name='restart'
-      :disabled="$store.state.step !== 5"
+      :disabled="$store.state.step !== lastStep"
       @click="handleRestart"
     >Restart</button>
   </section>
 </template>
 
 <script>
+import input from '../assets/input'
+
 export default {
   name: 'StepMenu',
+  data () {
+    return {
+      firstStep: input.items[0].itemId,
+      lastStep: input.items[input.items.length - 1].itemId,
+      secondToLastStep: input.items[input.items.length - 2].itemId
+    }
+  },
   methods: {
     handleNext (e) {
       this.$store.commit('handleNext')
