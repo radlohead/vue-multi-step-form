@@ -53,15 +53,6 @@ const handleException = (state) => {
   }
 }
 
-const handleSubmit = (state) => {
-  if (state.step === 5) {
-    setTimeout(() => {
-      console.log(JSON.parse(JSON.stringify(state.form)))
-      alert('작성한 폼이 제출되었습니다.')
-    }, 700)
-  }
-}
-
 const formTypeName = {
   checkbox: 1,
   radio: 2,
@@ -69,12 +60,21 @@ const formTypeName = {
   selectbox: 4
 }
 
+const handleSubmit = (state) => {
+  const submitStep = input.items[input.items.length - 1].itemId + 1
+  if (state.step === submitStep) {
+    setTimeout(() => {
+      console.log(JSON.parse(JSON.stringify(state.form)))
+      alert('작성한 폼이 제출되었습니다.')
+    }, 700)
+  }
+}
+
 const answerCheck = (state, formTypeNum, answerCheckIndex) => {
   const cleanTimeTextArr = input.items[answerCheckIndex].options.map(v => v.text)
   const cleanTimeFilter = state.form.items.some(v => cleanTimeTextArr.some(a => a === v.answer))
 
   if (state.step !== formTypeNum) return false
-  if (!cleanTimeFilter) handleException(state)
   return !cleanTimeFilter
 }
 
