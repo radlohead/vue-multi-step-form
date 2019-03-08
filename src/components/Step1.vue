@@ -33,6 +33,7 @@
         />
       </li>
     </ul>
+    {{ this.$store.state.step }}
   </section>
 </template>
 

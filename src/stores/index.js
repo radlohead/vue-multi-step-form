@@ -54,6 +54,13 @@ const handleSubmit = (state) => {
   }
 }
 
+const answerCheck = (state, num, answerCheckIndex) => {
+  const cleanTimeTextArr = input.items[answerCheckIndex].options.map(v => v.text)
+  const cleanTimeFilter = state.form.items.some(v => cleanTimeTextArr.some(a => a === v.answer))
+
+  if (state.step === num) return !cleanTimeFilter
+}
+
 const store = new Vuex.Store({
   state: {
     step: 1,
@@ -65,14 +72,10 @@ const store = new Vuex.Store({
   mutations: {
     handleNext (state) {
       let currentId = null
-      const cleanTimeTextArr = input.items[1].options.map(v => v.text)
       for (const a of state.form.items) currentId = a.id
       for (const obj of formOptionsId()) {
         if (obj.itemId === state.step && obj.id === currentId) {
-          if (state.step === 2) {
-            const cleanTimeFilter = state.form.items.map(v => cleanTimeTextArr.some(a => a === v.answer))
-            if (!cleanTimeFilter[cleanTimeFilter.length - 1]) return
-          }
+          if (answerCheck(state, 2, 1)) return
           state.step = obj.itemId + 1
           handleSubmit(state)
           return
