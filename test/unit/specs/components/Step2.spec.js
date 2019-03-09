@@ -3,11 +3,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Step2 from '@/components/Step2'
 
 const localVue = createLocalVue();
-let store;
 localVue.use(Vuex);
 
 describe('Step2 describe', () => {
-    let wrapper;
+    let store;
 
     beforeEach(() => {
         store = new Vuex.Store({
@@ -16,7 +15,7 @@ describe('Step2 describe', () => {
     });
 
     it('Step2 test', () => {
-        wrapper = shallowMount(Step2, { store, localVue });
+        const wrapper = shallowMount(Step2, { store, localVue });
         expect(wrapper.isVueInstance()).toBeTruthy();
     });
 });
