@@ -147,6 +147,13 @@ const duplicateItems = (state, formTypeName) => {
   console.log('duplicateItems', JSON.parse(JSON.stringify(deleteDuplicateItems)))
 }
 
+const duplicateTextItems = (state, formTypeName) => {
+  if (formTypeName !== 'text') return
+  const findIndex = state.form.items.findIndex(v => !v.id ? v : null)
+  state.form.items.splice(findIndex, 1)
+  console.log('duplicateTextItems', JSON.parse(JSON.stringify(state.form.items)), findIndex)
+}
+
 const store = new Vuex.Store({
   state: {
     step: 1,
@@ -165,7 +172,7 @@ const store = new Vuex.Store({
       state.step -= 1
       if (state.step === 1) duplicateItems(state, 'checkbox')
       else if (state.step === 2) duplicateItems(state, 'radio')
-      else if (state.step === 3) duplicateItems(state, 'text')
+      else if (state.step === 3) duplicateTextItems(state, 'text')
       else if (state.step === 4) duplicateItems(state, 'selectbox')
       console.log('handleBack', JSON.parse(JSON.stringify(state.form)), state.step)
     },
