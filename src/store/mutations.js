@@ -1,12 +1,11 @@
-import { CHECKBOX, RADIO, TEXT, SELECTBOX, formTypeName } from './constants'
+import { RADIO, SELECTBOX, formTypeName } from './constants'
 import {
   handleException,
   formTypeId,
   formTypeIndex,
   formIdDuplication,
   stepIncrement,
-  duplicateItems,
-  duplicateTextItems
+  duplicateItemsStepAll
 } from './functions'
 
 export const mutations = {
@@ -17,10 +16,7 @@ export const mutations = {
   },
   handleBack (state) {
     state.step -= 1
-    if (state.step === 1) duplicateItems(state, CHECKBOX)
-    else if (state.step === 2) duplicateItems(state, RADIO)
-    else if (state.step === 3) duplicateTextItems(state, TEXT)
-    else if (state.step === 4) duplicateItems(state, SELECTBOX)
+    duplicateItemsStepAll(state)
     console.log('handleBack', JSON.parse(JSON.stringify(state.form)), state.step)
   },
   handleRestart (state) {

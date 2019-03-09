@@ -1,5 +1,5 @@
 import input from '../assets/input'
-import { RADIO, TEXT, formTypeName } from './constants'
+import { CHECKBOX, RADIO, TEXT, SELECTBOX, formTypeName } from './constants'
 
 export const optionsNotId = (optionsId, arrNum) => {
   for (const num of arrNum) {
@@ -137,9 +137,30 @@ export const duplicateItems = (state, formTypeName) => {
   console.log('duplicateItems', JSON.parse(JSON.stringify(deleteDuplicateItems)))
 }
 
-export const duplicateTextItems = (state, formTypeName) => {
-  if (formTypeName !== TEXT) return
+export const duplicateTextItems = (state) => {
   const findIndex = state.form.items.findIndex(v => !v.id ? v : null)
   state.form.items.splice(findIndex, 1)
   console.log('duplicateTextItems', JSON.parse(JSON.stringify(state.form.items)), findIndex)
+}
+
+export const duplicateItemsStep = {
+  CHECKBOX: (state) => {
+    if (state.step === formTypeName[CHECKBOX]) duplicateItems(state, CHECKBOX)
+  },
+  RADIO: (state) => {
+    if (state.step === formTypeName[RADIO]) duplicateItems(state, RADIO)
+  },
+  TEXT: (state) => {
+    if (state.step === formTypeName[TEXT]) duplicateTextItems(state)
+  },
+  SELECTBOX: (state) => {
+    if (state.step === formTypeName[SELECTBOX]) duplicateItems(state, SELECTBOX)
+  }
+}
+
+export const duplicateItemsStepAll = (state) => {
+  duplicateItemsStep[CHECKBOX](state)
+  duplicateItemsStep[RADIO](state)
+  duplicateItemsStep[TEXT](state)
+  duplicateItemsStep[SELECTBOX](state)
 }
