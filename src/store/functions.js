@@ -1,5 +1,5 @@
 import input from '../assets/input'
-import { CHECKBOX, RADIO, TEXT, SELECTBOX, formTypeName } from './constants'
+import { CHECKBOX, RADIO, TEXT, SELECTBOX, formTypeName, formOptionsNotId } from './constants'
 
 export const optionsNotId = (optionsId, arrNum) => {
   for (const num of arrNum) {
@@ -13,6 +13,7 @@ export const optionsNotId = (optionsId, arrNum) => {
 
 export const formOptionsId = () => {
   let optionsId = []
+
   for (const obj of Array.from(input.items)) {
     for (const i of obj.options.keys()) {
       optionsId.push({
@@ -21,26 +22,27 @@ export const formOptionsId = () => {
       })
     }
   }
-  optionsNotId(optionsId, [3])
+  optionsNotId(optionsId, formOptionsNotId)
   return optionsId
 }
 
 export const handleException = (state) => {
   let currentId = null
+
   for (const a of state.form.items) currentId = a.id
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step && obj.id !== currentId) {
       switch (state.step) {
-        case 1:
+        case formTypeName[CHECKBOX]:
           alert('청소 스타일을 체크해 주세요.')
           break
-        case 2:
+        case formTypeName[RADIO]:
           alert('청소 시간을 체크해 주세요')
           break
-        case 3:
+        case formTypeName[TEXT]:
           alert('원하는 청소 스타일을 추가로 입력해 주세요')
           break
-        case 4:
+        case formTypeName[SELECTBOX]:
           alert('네번째 질문을 선택해 주세요')
           break
       }
@@ -96,6 +98,7 @@ export const formTypeIndex = (typeName) => {
 
 export const formIdDuplication = (state, formTypeName) => {
   let exceptionText = []
+
   for (const obj of input.items) {
     if (obj.itemId === formTypeName) {
       for (const i of obj.options.keys()) exceptionText.push(obj.options[i].text)
@@ -117,7 +120,7 @@ export const stepIncrement = (state) => {
   for (const a of state.form.items) currentId = a.id
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step && obj.id === currentId) {
-      if (answerCheck(state, formTypeName[RADIO], 1)) return
+      if (answerCheck(state, formTypeName[RADIO], formTypeName[RADIO] - 1)) return
       state.step = obj.itemId + 1
       handleSubmit(state)
       return true

@@ -9,3 +9,5 @@ export const formTypeName = {
   TEXT: 3,
   SELECTBOX: 4
 }
+
+export const formOptionsNotId = [3]

@@ -56,7 +56,7 @@ export const mutations = {
     })
     console.log('updateRadio', JSON.parse(JSON.stringify(state.form.items)))
   },
-  updateCleanStyleText (state, items) {
+  updateText (state, items) {
     const valueLength = items.value.replace(/\s/g, '')
     let count = 0
 
