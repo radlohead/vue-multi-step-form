@@ -83,17 +83,24 @@ const formTypeId = () => {
   let result = []
   for (const obj of Array.from(input.items)) {
     let optionsId = []
-    for (const a of Array.from(obj.options)) optionsId.push(a.id)
+    let optionsText = []
+    for (const a of Array.from(obj.options)) {
+      optionsId.push(a.id)
+      optionsText.push(a.text)
+    }
     result.push({
       formType: obj.formType,
-      id: optionsId
+      id: optionsId,
+      text: optionsText
     })
   }
+  console.log('formTypeId', result)
   return result
 }
 
 const formTypeIndex = (typeName) => {
   const findIndex = formTypeId().findIndex(v => v.formType === formTypeName[typeName])
+  console.log('formTypeindex', findIndex)
   return findIndex
 }
 
@@ -125,7 +132,19 @@ const stepIncrement = (state) => {
       handleSubmit(state)
       return true
     }
+    console.log('handleNext', JSON.parse(JSON.stringify(state.form.items)))
   }
+}
+
+const duplicateItems = (state, formTypeName) => {
+  const step = formTypeId()[formTypeIndex(formTypeName)].text
+  const duplicateItems = step
+    .map(v => state.form.items.find(a => v === a.answer ? a : null))
+    .filter(v => { if (v) return v })
+  const items = state.form.items.map(v => duplicateItems.filter(a => v.answer === a.answer)).flat()
+  const deleteDuplicateItems = items.map(v => state.form.items.filter(a => v.answer !== a.answer)).flat()
+  state.form.items = deleteDuplicateItems
+  console.log('duplicateItems', JSON.parse(JSON.stringify(deleteDuplicateItems)))
 }
 
 const store = new Vuex.Store({
@@ -140,11 +159,15 @@ const store = new Vuex.Store({
     handleNext (state) {
       if (stepIncrement(state)) return
       else handleException(state)
-      console.log('handleNext', JSON.parse(JSON.stringify(state.form)), state.step)
+      console.log('handleNext', JSON.parse(JSON.stringify(state.form.items)))
     },
     handleBack (state) {
       state.step -= 1
-      console.log('handleBack', state.step, formOptionsId())
+      if (state.step === 1) duplicateItems(state, 'checkbox')
+      else if (state.step === 2) duplicateItems(state, 'radio')
+      else if (state.step === 3) duplicateItems(state, 'text')
+      else if (state.step === 4) duplicateItems(state, 'selectbox')
+      console.log('handleBack', JSON.parse(JSON.stringify(state.form)), state.step)
     },
     handleRestart (state) {
       state.form.items = []
