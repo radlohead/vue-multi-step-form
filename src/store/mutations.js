@@ -57,10 +57,10 @@ export const mutations = {
     console.log('updateRadio', JSON.parse(JSON.stringify(state.form.items)))
   },
   updateText (state, items) {
-    const valueLength = items.value.replace(/\s/g, '')
+    const deleteBlankValue = items.value.replace(/\s/g, '')
     let count = 0
 
-    if (!valueLength) return
+    if (!deleteBlankValue.length) items.value = deleteBlankValue
     for (const obj of state.form.items) {
       if (obj.id) ++count
       if (state.form.items.length === count) state.form.items.push({ answer: items.value })
@@ -71,7 +71,7 @@ export const mutations = {
         state.form.items.splice(i, 1)
       }
     }
-    console.log('updateCleanStyleText', JSON.parse(JSON.stringify(state.form.items)), items.id, items.value)
+    console.log('updateText', JSON.parse(JSON.stringify(state.form.items)), items.id, items.value)
   },
   updateSelect (state, items) {
     const idArr = formTypeId()[formTypeIndex(SELECTBOX)].id
