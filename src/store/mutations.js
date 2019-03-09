@@ -1,5 +1,13 @@
-import { CHECKBOX, RADIO, TEXT, SELECTBOX, formTypeName } from './constant'
-import { handleException, formTypeId, formTypeIndex, formIdDuplication, stepIncrement, duplicateItems, duplicateTextItems } from './function'
+import { CHECKBOX, RADIO, TEXT, SELECTBOX, formTypeName } from './constants'
+import {
+  handleException,
+  formTypeId,
+  formTypeIndex,
+  formIdDuplication,
+  stepIncrement,
+  duplicateItems,
+  duplicateTextItems
+} from './functions'
 
 export const mutations = {
   handleNext (state) {

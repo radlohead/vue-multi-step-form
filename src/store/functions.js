@@ -1,5 +1,5 @@
 import input from '../assets/input'
-import { RADIO, TEXT, formTypeName } from './constant'
+import { RADIO, TEXT, formTypeName } from './constants'
 
 export const optionsNotId = (optionsId, arrNum) => {
   for (const num of arrNum) {
