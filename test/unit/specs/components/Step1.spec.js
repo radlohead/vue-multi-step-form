@@ -9,25 +9,25 @@
 //   })
 // })
 
-import Vuex from 'vuex'
-import { shallowMount, createLocalVue,  } from '@vue/test-utils'
-import Step1 from '@/components/Step1'
+import Vuex from 'vuex';
+import { shallowMount, createLocalVue,  } from '@vue/test-utils';
+import Step1 from '@/components/Step1';
 
-const localVue = createLocalVue()
-let store
-localVue.use(Vuex)
+const localVue = createLocalVue();
+let store;
+localVue.use(Vuex);
 
 describe('Step1 describe', () => {
-  let wrapper
+  let wrapper;
 
   beforeEach(() => {
     store = new Vuex.Store({
       state: {}
     })
-  })
+  });
   
   it('Step1 test', () => {
-    wrapper = shallowMount(Step1, { store, localVue })
-    expect(wrapper.isVueInstance()).toBeTruthy()
-  })
-})
+    wrapper = shallowMount(Step1, { store, localVue });
+    expect(wrapper.isVueInstance()).toBeTruthy();
+  });
+});
