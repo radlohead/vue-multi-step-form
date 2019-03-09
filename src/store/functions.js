@@ -33,7 +33,6 @@ export const handleException = (state) => {
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step && obj.id !== currentId) {
       stepExceptionAlertAll(state.step)
-      console.log('exception', state.step, obj.id, currentId)
       return
     }
   }
@@ -44,7 +43,7 @@ export const handleSubmit = (state) => {
 
   if (state.step === submitStep) {
     setTimeout(() => {
-      console.log(JSON.parse(JSON.stringify(state.form)))
+      console.log(JSON.parse(JSON.stringify(state.form.items)))
       alert('작성한 폼이 제출되었습니다.')
     }, 700)
   }
@@ -73,13 +72,11 @@ export const formTypeId = () => {
       text: optionsText
     })
   }
-  console.log('formTypeId', result)
   return result
 }
 
 export const formTypeIndex = (typeName) => {
   const findIndex = formTypeId().findIndex(v => v.formType === formTypeName[typeName])
-  console.log('formTypeindex', findIndex)
   return findIndex
 }
 
@@ -112,7 +109,6 @@ export const stepIncrement = (state) => {
       handleSubmit(state)
       return true
     }
-    console.log('handleNext', JSON.parse(JSON.stringify(state.form.items)))
   }
 }
 
@@ -124,13 +120,11 @@ export const duplicateItems = (state, formTypeName) => {
   const items = state.form.items.map(v => duplicateItems.filter(a => v.answer === a.answer)).flat()
   const deleteDuplicateItems = items.map(v => state.form.items.filter(a => v.answer !== a.answer)).flat()
   state.form.items = deleteDuplicateItems
-  console.log('duplicateItems', JSON.parse(JSON.stringify(deleteDuplicateItems)))
 }
 
 export const duplicateTextItems = (state) => {
   const findIndex = state.form.items.findIndex(v => !v.id ? v : null)
   state.form.items.splice(findIndex, 1)
-  console.log('duplicateTextItems', JSON.parse(JSON.stringify(state.form.items)), findIndex)
 }
 
 export const duplicateItemsStep = {

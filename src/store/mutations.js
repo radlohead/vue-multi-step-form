@@ -10,14 +10,12 @@ import {
 
 export const mutations = {
   handleNext (state) {
-    if (stepIncrement(state)) return
+    if (stepIncrement(state)) return null
     else handleException(state)
-    console.log('handleNext', JSON.parse(JSON.stringify(state.form.items)))
   },
   handleBack (state) {
     state.step -= 1
     duplicateItemsStepAll(state)
-    console.log('handleBack', JSON.parse(JSON.stringify(state.form)), state.step)
   },
   handleRestart (state) {
     state.form.items = []
@@ -36,7 +34,6 @@ export const mutations = {
         }
       }
     }
-    console.log('updateCheckbox', JSON.parse(JSON.stringify(state.form)), items.id, items.value, items.checked)
   },
   updateRadio (state, items) {
     const idArr = formTypeId()[formTypeIndex(RADIO)].id
@@ -54,7 +51,6 @@ export const mutations = {
       id: Number(items.id),
       answer: items.value
     })
-    console.log('updateRadio', JSON.parse(JSON.stringify(state.form.items)))
   },
   updateText (state, items) {
     const deleteBlankValue = items.value.replace(/\s/g, '')
@@ -71,7 +67,6 @@ export const mutations = {
         state.form.items.splice(i, 1)
       }
     }
-    console.log('updateText', JSON.parse(JSON.stringify(state.form.items)), items.id, items.value)
   },
   updateSelect (state, items) {
     const idArr = formTypeId()[formTypeIndex(SELECTBOX)].id
@@ -89,6 +84,5 @@ export const mutations = {
       id: selectId,
       answer: selectText
     })
-    console.log('updateSelect', JSON.parse(JSON.stringify(state.form.items)))
   }
 }
