@@ -32,20 +32,7 @@ export const handleException = (state) => {
   for (const a of state.form.items) currentId = a.id
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step && obj.id !== currentId) {
-      switch (state.step) {
-        case formTypeName[CHECKBOX]:
-          alert('청소 스타일을 체크해 주세요.')
-          break
-        case formTypeName[RADIO]:
-          alert('청소 시간을 체크해 주세요')
-          break
-        case formTypeName[TEXT]:
-          alert('원하는 청소 스타일을 추가로 입력해 주세요')
-          break
-        case formTypeName[SELECTBOX]:
-          alert('네번째 질문을 선택해 주세요')
-          break
-      }
+      stepExceptionAlertAll(state.step)
       console.log('exception', state.step, obj.id, currentId)
       return
     }
@@ -166,4 +153,26 @@ export const duplicateItemsStepAll = (state) => {
   duplicateItemsStep[RADIO](state)
   duplicateItemsStep[TEXT](state)
   duplicateItemsStep[SELECTBOX](state)
+}
+
+export const stepExceptionAlert = {
+  CHECKBOX: (step) => {
+    if (step === formTypeName[CHECKBOX]) alert('청소 스타일을 체크해 주세요.')
+  },
+  RADIO: (step) => {
+    if (step === formTypeName[RADIO]) alert('청소 시간을 체크해 주세요')
+  },
+  TEXT: (step) => {
+    if (step === formTypeName[TEXT]) alert('원하는 청소 스타일을 추가로 입력해 주세요')
+  },
+  SELECTBOX: (step) => {
+    if (step === formTypeName[SELECTBOX]) alert('네번째 질문을 선택해 주세요')
+  }
+}
+
+export const stepExceptionAlertAll = (step) => {
+  stepExceptionAlert[CHECKBOX](step)
+  stepExceptionAlert[RADIO](step)
+  stepExceptionAlert[TEXT](step)
+  stepExceptionAlert[SELECTBOX](step)
 }

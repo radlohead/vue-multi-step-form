@@ -3,7 +3,7 @@
     <h2>{{ title }}</h2>
     <input
       type="text"
-      @input="updateCleanStyleText"
+      @input="updateText"
     />
   </section>
 </template>
@@ -19,8 +19,8 @@ export default {
     }
   },
   methods: {
-    updateCleanStyleText (e) {
-      this.$store.commit('updateCleanStyleText', e.target)
+    updateText (e) {
+      this.$store.commit('updateText', e.target)
     }
   }
 }
