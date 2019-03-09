@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import input from '../assets/input'
-import { mutations } from './mutations'
+import mutations from './mutations'
 
 Vue.use(Vuex)
 

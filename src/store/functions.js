@@ -154,13 +154,13 @@ export const stepExceptionAlert = {
     if (step === formTypeName[CHECKBOX]) alert('청소 스타일을 체크해 주세요.')
   },
   RADIO: (step) => {
-    if (step === formTypeName[RADIO]) alert('청소 시간을 체크해 주세요')
+    if (step === formTypeName[RADIO]) alert('청소 시간을 체크해 주세요.')
   },
   TEXT: (step) => {
-    if (step === formTypeName[TEXT]) alert('원하는 청소 스타일을 추가로 입력해 주세요')
+    if (step === formTypeName[TEXT]) alert('원하는 청소 스타일을 추가로 입력해 주세요.')
   },
   SELECTBOX: (step) => {
-    if (step === formTypeName[SELECTBOX]) alert('네번째 질문을 선택해 주세요')
+    if (step === formTypeName[SELECTBOX]) alert('네번째 질문을 선택해 주세요.')
   }
 }
 

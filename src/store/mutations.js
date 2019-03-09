@@ -8,7 +8,7 @@ import {
   duplicateItemsStepAll
 } from './functions'
 
-export const mutations = {
+export default {
   handleNext (state) {
     if (stepIncrement(state)) return null
     else handleException(state)
