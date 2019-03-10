@@ -90,18 +90,15 @@ describe('mutations handleNext test', () => {
 });
 
 describe('mutations handleBack test', () => {
-    let mockState = {
-        step: 4,
-        form: {
-            id: input.formId,
-            items: [
-                itemOptions[0],
-                itemOptions[1],
-                itemOptions[2],
-                itemOptions[3]
-            ]
-        }
-    }
+    const mockState = state(
+        4,
+        [
+            itemOptions[0],
+            itemOptions[1],
+            itemOptions[2],
+            itemOptions[3]
+        ]
+    );
 
     beforeEach(() => {
         mutations.handleBack(mockState);
@@ -110,7 +107,29 @@ describe('mutations handleBack test', () => {
         mutations.handleBack(mockState);
     });
     
-    it('mutations handleBack step4 ~ step1 test', () => {
+    it('step4 ~ step1 test', () => {
         expect(mockState.form.items.length).toBe(1);
+    });
+});
+
+describe('mutations handleRestart test', () => {
+    const mockState = state(
+        5,
+        [
+            itemOptions[0],
+            itemOptions[1],
+            itemOptions[2],
+            itemOptions[3]
+        ]
+    );
+
+    mutations.handleRestart(mockState);
+
+    it('handleRestart step test', () => {
+        expect(mockState.step).toBe(1);
+    });
+
+    it('handleRestart items test', () => {
+        expect(mockState.form.items.length).toBe(0);
     });
 });
