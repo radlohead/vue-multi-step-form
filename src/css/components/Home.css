@@ -1,0 +1,20 @@
+@import '../Common.css';
+
+.home {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.main {
+    padding: 20px;
+    border: 1px solid #bdbdbd;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+ul {
+    display: inline-block;
+    text-align: left;
+}

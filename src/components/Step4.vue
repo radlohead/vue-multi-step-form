@@ -1,5 +1,6 @@
 <template>
   <section>
+    <h2>{{ title }}</h2>
     <ul>
       <li>
         <select

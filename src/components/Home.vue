@@ -1,11 +1,13 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <h1>{{ title }}</h1>
-    <Step1 v-if="step() === 1"/>
-    <Step2 v-if="step() === 2"/>
-    <Step3 v-if="step() === 3"/>
-    <Step4 v-if="step() === 4"/>
-    <Complete v-if="step() === 5"/>
+    <section class="main">
+      <Step1 v-if="step() === 1"/>
+      <Step2 v-if="step() === 2"/>
+      <Step3 v-if="step() === 3"/>
+      <Step4 v-if="step() === 4"/>
+      <Complete v-if="step() === 5"/>
+    </section>
     <StepMenu/>
   </div>
 </template>
@@ -18,6 +20,7 @@ import Step4 from './Step4'
 import Complete from './Complete'
 import StepMenu from './StepMenu'
 import input from '../assets/input'
+import '../css/components/Home.css'
 
 export default {
   name: 'Home',
@@ -41,20 +44,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

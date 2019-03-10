@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="step__menu">
     <button
       name='back'
       :disabled="$store.state.step === firstStep || $store.state.step === lastStep"
@@ -20,6 +20,7 @@
 
 <script>
 import input from '../assets/input'
+import '../css/components/StepMenu.css'
 
 export default {
   name: 'StepMenu',

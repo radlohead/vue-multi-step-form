@@ -1,0 +1,7 @@
+@import './Common.css';
+
+#app {
+    text-align: center;
+    color: #333;
+    margin-top: 10px;
+}

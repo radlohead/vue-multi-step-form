@@ -3,7 +3,6 @@
     <h2>{{ title }}</h2>
     <ul>
       <li>
-        <label for="3">30분</label>
         <input
           type="radio"
           id="3"
@@ -11,9 +10,9 @@
           value="30분"
           @input="updateRadio"
         />
+        <label for="3">30분</label>
       </li>
       <li>
-        <label for="4">1시간</label>
         <input
           type="radio"
           id="4"
@@ -21,9 +20,9 @@
           value="1시간"
           @input="updateRadio"
         />
+        <label for="4">1시간</label>
       </li>
       <li>
-        <label for="5">2시간</label>
         <input
           type="radio"
           id="5"
@@ -31,6 +30,7 @@
           value="2시간"
           @input="updateRadio"
         />
+        <label for="5">2시간</label>
       </li>
     </ul>
   </section>
