@@ -1,7 +1,9 @@
+import Vue from 'vue';
 import mutations from '@/store/mutations';
 import input from '@/assets/input';
 import { items as itemOptions } from '@/assets/output';
 import { alertMessage } from '../../setup';
+import Step4 from '@/components/Step4';
 
 const state = (stepCount, options) => {
     return {
@@ -208,24 +210,29 @@ describe('mutations updateText test', () => {
     });
 });
 
-describe('mutations updateSelect test', () => {
-    const div = document.createElement('div');
-    const selectbox = `<select name="selectbox" selected="selected"><option disabled="disabled" selected="selected">질문을 선택해 주세요</option> <option id="6">React 좋아하시나요?</option> <option id="7">Vue 좋아하시나요?</option> <option id="8">React VS Vue 과연 승자는?</option></select>`;
+describe('mutations updateSelectbox test', () => {
+    const Constructor = Vue.extend(Step4);
+    const vm = new Constructor().$mount();
     let mockState = mockState = state(4, take(3, itemOptions));;
-    let items = null;
+    let items = vm.$el.querySelector('select');;
     let index = null;
 
-    const selectOption = () => {
-        div.innerHTML = selectbox;
-        items = div.querySelector('select');
-        items.options.selectedIndex = 1;
-    }
-    selectOption();
-    
-    mutations.updateSelect(mockState, items);
-    index = mockState.form.items.length - 1;
-
-    it('answer test', () => {
-        expect(mockState.form.items[index].answer).toEqual(items.value);
+    it('selected option id', () => {
+        const selectedIndex = 1;
+        const seletedItemOptionId = Number(items.options[selectedIndex].id);
+        
+        items.options.selectedIndex = selectedIndex;
+        mutations.updateSelect(mockState, items);
+        index = mockState.form.items.length - 1;
+        expect(mockState.form.items[index].id).toEqual(seletedItemOptionId);
     });
+
+    it('selected option value', () => {
+        const selectedIndex = 1;
+
+        items.options.selectedIndex = selectedIndex;
+        mutations.updateSelect(mockState, items);
+        index = mockState.form.items.length - 1;
+        expect(mockState.form.items[index].answer).toEqual(items.value);
+    })
 });
