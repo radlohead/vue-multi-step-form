@@ -2,32 +2,14 @@
   <section>
     <h2>{{ title }}</h2>
     <ul>
-      <li>
+      <li v-for="item in options" :key="item.id">
         <input
           type="checkbox"
-          id="1"
-          value="스팀청소"
+          v-bind:id="item.id"
+          v-bind:value="item.text"
           @input="updateCheckbox"
         />
-        <label for="1">스팀청소</label>
-      </li>
-      <li>
-        <input
-          type="checkbox"
-          id="2"
-          value="진공청소기로 청소"
-          @input="updateCheckbox"
-        />
-        <label for="2">진공청소기로 청소</label>
-      </li>
-      <li>
-        <input
-          type="checkbox"
-          id="3"
-          value="쓰레기 비우기"
-          @input="updateCheckbox"
-        />
-        <label for="3">쓰레기 비우기</label>
+        <label v-bind:for="item.id">{{ item.text }}</label>
       </li>
     </ul>
   </section>
@@ -40,7 +22,8 @@ export default {
   name: 'Step1',
   data () {
     return {
-      title: input.items[0].title
+      title: input.items[0].title,
+      options: input.items[0].options
     }
   },
   methods: {
