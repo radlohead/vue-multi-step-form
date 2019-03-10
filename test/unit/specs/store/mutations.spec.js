@@ -147,3 +147,33 @@ describe('mutations updateCheckbox test', () => {
         expect(mockState.form.items[1].answer).toBe(mockItems.value);
     });
 });
+
+describe('mutations updateRadio test', () => {
+    const mockState = state(
+        2,
+        take(2, itemOptions)
+    );
+
+    const mockItems = {
+        id: 4,
+        value: '1시간',
+        checked: false,
+    }
+
+    const mockItems2 = {
+        id: 5,
+        value: '2시간',
+        checked: true,
+    }
+
+    mutations.updateCheckbox(mockState, mockItems);
+    mutations.updateCheckbox(mockState, mockItems2);
+
+    it('items id test', () => {
+        expect(mockState.form.items[2].id).toBe(mockItems2.id);
+    });
+
+    it('items value test', () => {
+        expect(mockState.form.items[2].answer).toBe(mockItems2.value);
+    });
+});
