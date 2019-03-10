@@ -1,4 +1,4 @@
-import { RADIO, SELECTBOX, formTypeName } from './constants'
+import { RADIO, SELECTBOX, FORM_TYPE_NAME } from './constants'
 import {
   handleException,
   formTypeId,
@@ -46,7 +46,7 @@ export default {
       }
     }
 
-    formIdDuplication(state, formTypeName[RADIO])
+    formIdDuplication(state, FORM_TYPE_NAME[RADIO])
     state.form.items.push({
       id: Number(items.id),
       answer: items.value

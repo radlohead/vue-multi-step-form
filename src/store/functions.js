@@ -1,5 +1,17 @@
 import input from '../assets/input'
-import { CHECKBOX, RADIO, TEXT, SELECTBOX, formTypeName, formOptionsNotId } from './constants'
+import {
+  CHECKBOX,
+  RADIO,
+  SELECTBOX,
+  FORM_TYPE_NAME,
+  STEP1,
+  STEP2,
+  STEP3,
+  STEP4,
+  FORM_ITEM_ID,
+  formOptionsNotId,
+  stepExceptionAlertMessage
+} from './constants'
 
 export const optionsNotId = (optionsId, arrNum) => {
   for (const num of arrNum) {
@@ -39,7 +51,7 @@ export const handleException = (state) => {
 }
 
 export const handleSubmit = (state) => {
-  const submitStep = input.items[input.items.length - 1].itemId + 1
+  const submitStep = input.items.length + 1
 
   if (state.step === submitStep) {
     setTimeout(() => {
@@ -62,9 +74,9 @@ export const formTypeId = () => {
   for (const obj of Array.from(input.items)) {
     let optionsId = []
     let optionsText = []
-    for (const obj of Array.from(obj.options)) {
-      optionsId.push(obj.id)
-      optionsText.push(obj.text)
+    for (const option of Array.from(obj.options)) {
+      optionsId.push(option.id)
+      optionsText.push(option.text)
     }
     result.push({
       formType: obj.formType,
@@ -76,7 +88,7 @@ export const formTypeId = () => {
 }
 
 export const formTypeIndex = (typeName) => {
-  const findIndex = formTypeId().findIndex(v => v.formType === formTypeName[typeName])
+  const findIndex = formTypeId().findIndex(v => v.formType === FORM_TYPE_NAME[typeName])
   return findIndex
 }
 
@@ -104,7 +116,7 @@ export const stepIncrement = (state) => {
   for (const obj of state.form.items) currentId = obj.id
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step && obj.id === currentId) {
-      if (answerCheck(state, formTypeName[RADIO], formTypeName[RADIO] - 1)) return
+      if (answerCheck(state, FORM_ITEM_ID[STEP2], FORM_ITEM_ID[STEP1])) return
       state.step = obj.itemId + 1
       handleSubmit(state)
       return true
@@ -128,47 +140,47 @@ export const duplicateTextItems = (state) => {
 }
 
 export const duplicateItemsStep = {
-  CHECKBOX: (state) => {
-    if (state.step === formTypeName[CHECKBOX]) duplicateItems(state, CHECKBOX)
+  STEP1: (state) => {
+    if (state.step === FORM_ITEM_ID[STEP1]) duplicateItems(state, CHECKBOX)
   },
-  RADIO: (state) => {
-    if (state.step === formTypeName[RADIO]) duplicateItems(state, RADIO)
+  STEP2: (state) => {
+    if (state.step === FORM_ITEM_ID[STEP2]) duplicateItems(state, RADIO)
   },
-  TEXT: (state) => {
-    if (state.step === formTypeName[TEXT]) duplicateTextItems(state)
+  STEP3: (state) => {
+    if (state.step === FORM_ITEM_ID[STEP3]) duplicateTextItems(state)
   },
-  SELECTBOX: (state) => {
-    if (state.step === formTypeName[SELECTBOX]) duplicateItems(state, SELECTBOX)
+  STEP4: (state) => {
+    if (state.step === FORM_ITEM_ID[STEP4]) duplicateItems(state, SELECTBOX)
   }
 }
 
 export const duplicateItemsStepAll = (state) => {
-  duplicateItemsStep[CHECKBOX](state)
-  duplicateItemsStep[RADIO](state)
-  duplicateItemsStep[TEXT](state)
-  duplicateItemsStep[SELECTBOX](state)
+  duplicateItemsStep[STEP1](state)
+  duplicateItemsStep[STEP2](state)
+  duplicateItemsStep[STEP3](state)
+  duplicateItemsStep[STEP4](state)
 }
 
 export const stepExceptionAlert = {
-  CHECKBOX: (step) => {
-    if (step === formTypeName[CHECKBOX]) alert('청소 스타일을 체크해 주세요.')
+  STEP1: (step) => {
+    if (step === FORM_ITEM_ID[STEP1]) alert(stepExceptionAlertMessage.CHECKBOX)
   },
-  RADIO: (step) => {
-    if (step === formTypeName[RADIO]) alert('청소 시간을 체크해 주세요.')
+  STEP2: (step) => {
+    if (step === FORM_ITEM_ID[STEP2]) alert(stepExceptionAlertMessage.RADIO)
   },
-  TEXT: (step) => {
-    if (step === formTypeName[TEXT]) alert('원하는 청소 스타일을 추가로 입력해 주세요.')
+  STEP3: (step) => {
+    if (step === FORM_ITEM_ID[STEP3]) alert(stepExceptionAlertMessage.TEXT)
   },
-  SELECTBOX: (step) => {
-    if (step === formTypeName[SELECTBOX]) alert('네번째 질문을 선택해 주세요.')
+  STEP4: (step) => {
+    if (step === FORM_ITEM_ID[STEP4]) alert(stepExceptionAlertMessage.SELECTBOX)
   }
 }
 
 export const stepExceptionAlertAll = (step) => {
-  stepExceptionAlert[CHECKBOX](step)
-  stepExceptionAlert[RADIO](step)
-  stepExceptionAlert[TEXT](step)
-  stepExceptionAlert[SELECTBOX](step)
+  stepExceptionAlert[STEP1](step)
+  stepExceptionAlert[STEP2](step)
+  stepExceptionAlert[STEP3](step)
+  stepExceptionAlert[STEP4](step)
 }
 
 export const optionsBlankItemId = () => {
