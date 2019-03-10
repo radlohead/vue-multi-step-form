@@ -29,7 +29,7 @@ export const formOptionsId = () => {
 export const handleException = (state) => {
   let currentId = null
 
-  for (const a of state.form.items) currentId = a.id
+  for (const obj of state.form.items) currentId = obj.id
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step && obj.id !== currentId) {
       stepExceptionAlertAll(state.step)
@@ -62,9 +62,9 @@ export const formTypeId = () => {
   for (const obj of Array.from(input.items)) {
     let optionsId = []
     let optionsText = []
-    for (const a of Array.from(obj.options)) {
-      optionsId.push(a.id)
-      optionsText.push(a.text)
+    for (const obj of Array.from(obj.options)) {
+      optionsId.push(obj.id)
+      optionsText.push(obj.text)
     }
     result.push({
       formType: obj.formType,
@@ -101,7 +101,7 @@ export const formIdDuplication = (state, formTypeName) => {
 export const stepIncrement = (state) => {
   let currentId = null
 
-  for (const a of state.form.items) currentId = a.id
+  for (const obj of state.form.items) currentId = obj.id
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step && obj.id === currentId) {
       if (answerCheck(state, formTypeName[RADIO], formTypeName[RADIO] - 1)) return
@@ -169,4 +169,12 @@ export const stepExceptionAlertAll = (step) => {
   stepExceptionAlert[RADIO](step)
   stepExceptionAlert[TEXT](step)
   stepExceptionAlert[SELECTBOX](step)
+}
+
+export const optionsBlankItemId = () => {
+  let optionsBlankItemId = []
+  for (const obj of Array.from(input.items)) {
+    if (!obj.options.length) optionsBlankItemId.push(obj.itemId)
+  }
+  return optionsBlankItemId
 }

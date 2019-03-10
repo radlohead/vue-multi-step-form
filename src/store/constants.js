@@ -1,3 +1,5 @@
+import { optionsBlankItemId } from './functions'
+
 export const CHECKBOX = 'CHECKBOX'
 export const RADIO = 'RADIO'
 export const TEXT = 'TEXT'
@@ -10,4 +12,4 @@ export const formTypeName = {
   SELECTBOX: 4
 }
 
-export const formOptionsNotId = [3]
+export const formOptionsNotId = optionsBlankItemId()
