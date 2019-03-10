@@ -88,3 +88,29 @@ describe('mutations handleNext test', () => {
         expect(alertMessage).toBe('네번째 질문을 선택해 주세요.');
     });
 });
+
+describe('mutations handleBack test', () => {
+    let mockState = {
+        step: 4,
+        form: {
+            id: input.formId,
+            items: [
+                itemOptions[0],
+                itemOptions[1],
+                itemOptions[2],
+                itemOptions[3]
+            ]
+        }
+    }
+
+    beforeEach(() => {
+        mutations.handleBack(mockState);
+        mutations.handleBack(mockState);
+        mutations.handleBack(mockState);
+        mutations.handleBack(mockState);
+    });
+    
+    it('mutations handleBack step4 ~ step1 test', () => {
+        expect(mockState.form.items.length).toBe(1);
+    });
+});
