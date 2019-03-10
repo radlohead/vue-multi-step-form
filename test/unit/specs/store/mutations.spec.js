@@ -13,50 +13,47 @@ const state = (stepIndex, options) => {
     }
 }
 
+const take = (n, iterable) => {
+    let result = [];
+    for(const a of iterable) {
+        n--;
+        result.push(a);
+        if(n <= 0) return result;
+    }
+}
+
 describe('mutations handleNext test', () => {
-    it('handleNext step1 test', () => {
+    it('step1 test', () => {
         expect(mutations.handleNext(state(
             1,
-            [
-                itemOptions[0]
-            ]
+            take(1, itemOptions)
         ))).toBeNull();
     });
 
-    it('handleNext step2 test', () => {
+    it('step2 test', () => {
         expect(mutations.handleNext(state(
             2,
-            [
-                itemOptions[0],
-                itemOptions[1]
-            ]
+            take(2, itemOptions)
         ))).toBeNull();
     });
 
-    it('handleNext step3 test', () => {
+    it('step3 test', () => {
         expect(mutations.handleNext(state(
             3,
-            [
-                itemOptions[0],
-                itemOptions[1],
-                itemOptions[2]
-            ]
+            take(3, itemOptions)
         ))).toBeNull();
     });
 
-    it('handleNext step4 test', () => {
+    it('step4 test', () => {
         expect(mutations.handleNext(state(
             4,
-            [
-                itemOptions[0],
-                itemOptions[1],
-                itemOptions[2],
-                itemOptions[3]
-            ]
+            take(4, itemOptions)
         ))).toBeNull();
     });
+});
 
-    it('handleNext step1 exception test', () => {
+describe('mutations exception test', () => {
+    it('step1 exception test', () => {
         mutations.handleNext(state(
             1,
             input.items[1].options
@@ -64,7 +61,7 @@ describe('mutations handleNext test', () => {
         expect(alertMessage).toBe('청소 스타일을 체크해 주세요.');
     });
 
-    it('handleNext step2 exception test', () => {
+    it('step2 exception test', () => {
         mutations.handleNext(state(
             2,
             input.items[1].options
@@ -72,7 +69,7 @@ describe('mutations handleNext test', () => {
         expect(alertMessage).toBe('청소 시간을 체크해 주세요.');
     });
 
-    it('handleNext step2 exception test', () => {
+    it('step2 exception test', () => {
         mutations.handleNext(state(
             3,
             input.items[1].options
@@ -80,24 +77,19 @@ describe('mutations handleNext test', () => {
         expect(alertMessage).toBe('원하는 청소 스타일을 추가로 입력해 주세요.');
     });
 
-    it('handleNext step2 exception test', () => {
+    it('step2 exception test', () => {
         mutations.handleNext(state(
             4,
             input.items[1].options
         ));
         expect(alertMessage).toBe('네번째 질문을 선택해 주세요.');
     });
-});
+})
 
 describe('mutations handleBack test', () => {
     const mockState = state(
         4,
-        [
-            itemOptions[0],
-            itemOptions[1],
-            itemOptions[2],
-            itemOptions[3]
-        ]
+        take(4, itemOptions)
     );
 
     beforeEach(() => {
@@ -115,21 +107,16 @@ describe('mutations handleBack test', () => {
 describe('mutations handleRestart test', () => {
     const mockState = state(
         5,
-        [
-            itemOptions[0],
-            itemOptions[1],
-            itemOptions[2],
-            itemOptions[3]
-        ]
+        take(4, itemOptions)
     );
 
     mutations.handleRestart(mockState);
 
-    it('handleRestart step test', () => {
+    it('step test', () => {
         expect(mockState.step).toBe(1);
     });
 
-    it('handleRestart items test', () => {
+    it('items test', () => {
         expect(mockState.form.items.length).toBe(0);
     });
 });
