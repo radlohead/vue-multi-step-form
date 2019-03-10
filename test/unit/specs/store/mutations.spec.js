@@ -177,3 +177,21 @@ describe('mutations updateRadio test', () => {
         expect(mockState.form.items[2].answer).toBe(mockItems2.value);
     });
 });
+
+describe('mutations updateText test', () => {
+    const mockState = state(
+        3,
+        take(3, itemOptions)
+    );
+
+    const mockItems = {
+        value: 'input text test'
+    }
+
+    mutations.updateText(mockState, mockItems);
+
+    it('answer test', () => {
+        const index = mockState.form.items.length - 1;
+        expect(mockState.form.items[index]).toEqual({ answer: mockItems.value });
+    });
+});
