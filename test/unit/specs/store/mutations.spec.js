@@ -120,3 +120,30 @@ describe('mutations handleRestart test', () => {
         expect(mockState.form.items.length).toBe(0);
     });
 });
+
+describe('mutations updateCheckbox test', () => {
+    const mockState = state(
+        1,
+        take(1, itemOptions)
+    );
+
+    const mockItems = {
+        id: 2,
+        value: 'checked test',
+        checked: true,
+    }
+
+    mutations.updateCheckbox(mockState, mockItems);
+
+    it('items length test', () => {
+        expect(mockState.form.items.length).toBe(2);
+    });
+
+    it('items id test', () => {
+        expect(mockState.form.items[1].id).toBe(mockItems.id);
+    });
+
+    it('items value test', () => {
+        expect(mockState.form.items[1].answer).toBe(mockItems.value);
+    });
+});
