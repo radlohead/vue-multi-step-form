@@ -9,9 +9,11 @@
           @change="updateSelect"
         >
           <option disabled selected="selected">질문을 선택해 주세요</option>
-          <option id="6">React 좋아하시나요?</option>
-          <option id="7">Vue 좋아하시나요?</option>
-          <option id="8">React VS Vue 과연 승자는?</option>
+          <option
+            v-for="item in options"
+            v-bind:id="item.id"
+            :key="item.id"
+          >{{ item.text }}</option>
         </select>
       </li>
     </ul>
@@ -25,7 +27,8 @@ export default {
   name: 'Step4',
   data () {
     return {
-      title: input.items[3].title
+      title: input.items[3].title,
+      options: input.items[3].options
     }
   },
   methods: {
