@@ -195,3 +195,26 @@ describe('mutations updateText test', () => {
         expect(mockState.form.items[index]).toEqual({ answer: mockItems.value });
     });
 });
+
+describe('mutations updateSelect test', () => {
+    const div = document.createElement('div');
+    const selectbox = `<select name="selectbox" selected="selected"><option disabled="disabled" selected="selected">질문을 선택해 주세요</option> <option id="6">React 좋아하시나요?</option> <option id="7">Vue 좋아하시나요?</option> <option id="8">React VS Vue 과연 승자는?</option></select>`;
+    let items = null;
+    let index = null;
+    let mockState = null;
+
+    div.innerHTML = selectbox;
+    items = div.querySelector('select');
+    mockState = state(
+        4,
+        take(3, itemOptions)
+    );
+
+    items.options.selectedIndex = 1;
+    mutations.updateSelect(mockState, items);
+    index = mockState.form.items.length - 1;
+
+    it('answer test', () => {
+        expect(mockState.form.items[index].answer).toEqual(items.value);
+    });
+});
