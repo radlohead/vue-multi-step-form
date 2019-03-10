@@ -3,9 +3,9 @@ import input from '@/assets/input';
 import { items as itemOptions } from '@/assets/output';
 import { alertMessage } from '../../setup';
 
-const state = (stepIndex, options) => {
+const state = (stepCount, options) => {
     return {
-        step: stepIndex,
+        step: stepCount,
         form: {
             id: input.formId,
             items: options
@@ -23,74 +23,92 @@ const take = (n, iterable) => {
 }
 
 describe('mutations handleNext test', () => {
-    it('step1 test', () => {
-        expect(mutations.handleNext(state(
-            1,
-            take(1, itemOptions)
-        ))).toBeNull();
+    it('step1 handleNext return null', () => {
+        const step = 1;
+        const mockState = state(step, take(1, itemOptions));
+        const returnValue = mutations.handleNext(mockState);
+        expect(returnValue).toBeNull();
     });
 
-    it('step2 test', () => {
-        expect(mutations.handleNext(state(
-            2,
-            take(2, itemOptions)
-        ))).toBeNull();
+    it('step1 step increment', () => {
+        const step = 1;
+        const mockState = state(step, take(1, itemOptions));
+        mutations.handleNext(mockState);
+        expect(mockState.step).toBe(step + 1);
     });
 
-    it('step3 test', () => {
-        expect(mutations.handleNext(state(
-            3,
-            take(3, itemOptions)
-        ))).toBeNull();
+    it('step2 handleNext return null', () => {
+        const step = 2;
+        const mockState = state(step, take(2, itemOptions));
+        const returnValue = mutations.handleNext(mockState);
+        expect(returnValue).toBeNull();
     });
 
-    it('step4 test', () => {
-        expect(mutations.handleNext(state(
-            4,
-            take(4, itemOptions)
-        ))).toBeNull();
+    it('step2 step increment', () => {
+        const step = 2;
+        const mockState = state(step, take(2, itemOptions));
+        mutations.handleNext(mockState);
+        expect(mockState.step).toBe(step + 1);
+    });
+
+    it('step3 handleNext return null', () => {
+        const step = 3;
+        const mockState = state(step, take(3, itemOptions));
+        const returnValue = mutations.handleNext(mockState);
+        expect(returnValue).toBeNull();
+    });
+
+    it('step3 step increment', () => {
+        const step = 3;
+        const mockState = state(step, take(3, itemOptions));
+        mutations.handleNext(mockState);
+        expect(mockState.step).toBe(step + 1);
+    });
+
+    it('step4 handleNext return null', () => {
+        const step = 4;
+        const mockState = state(step, take(4, itemOptions));
+        const returnValue = mutations.handleNext(mockState);
+        expect(returnValue).toBeNull();
+    });
+
+    it('step4 step increment', () => {
+        const step = 4;
+        const mockState = state(step, take(4, itemOptions));
+        mutations.handleNext(mockState);
+        expect(mockState.step).toBe(step + 1);
     });
 });
 
 describe('mutations exception test', () => {
     it('step1 exception test', () => {
-        mutations.handleNext(state(
-            1,
-            input.items[1].options
-        ));
+        const mockState = state(1, input.items[1].options);
+        mutations.handleNext(mockState);
         expect(alertMessage).toBe('청소 스타일을 체크해 주세요.');
     });
 
     it('step2 exception test', () => {
-        mutations.handleNext(state(
-            2,
-            input.items[1].options
-        ));
+        const mockState = state(2, input.items[1].options);
+        mutations.handleNext(mockState);
         expect(alertMessage).toBe('청소 시간을 체크해 주세요.');
     });
 
-    it('step2 exception test', () => {
-        mutations.handleNext(state(
-            3,
-            input.items[1].options
-        ));
+    it('step3 exception test', () => {
+        const mockState = state(3, input.items[1].options);
+        mutations.handleNext(mockState);
         expect(alertMessage).toBe('원하는 청소 스타일을 추가로 입력해 주세요.');
     });
 
-    it('step2 exception test', () => {
-        mutations.handleNext(state(
-            4,
-            input.items[1].options
-        ));
+    it('step4 exception test', () => {
+        const mockState = state(4, input.items[1].options);
+        mutations.handleNext(mockState);
         expect(alertMessage).toBe('네번째 질문을 선택해 주세요.');
     });
 })
 
 describe('mutations handleBack test', () => {
-    const mockState = state(
-        4,
-        take(4, itemOptions)
-    );
+    const mockState = state(4, take(4, itemOptions));
+    let lastSelectOptions = null;
 
     beforeEach(() => {
         mutations.handleBack(mockState);
@@ -98,62 +116,59 @@ describe('mutations handleBack test', () => {
         mutations.handleBack(mockState);
         mutations.handleBack(mockState);
     });
-    
+
     it('step4 ~ step1 test', () => {
-        expect(mockState.form.items.length).toBe(1);
+        lastSelectOptions = Array(itemOptions[3]);
+        expect(mockState.form.items).toEqual(lastSelectOptions);
     });
 });
 
 describe('mutations handleRestart test', () => {
-    const mockState = state(
-        5,
-        take(4, itemOptions)
-    );
+    const mockState = state(5, take(4, itemOptions));
+    const initialState = {
+        step: 1,
+        items: []
+    }
 
     mutations.handleRestart(mockState);
 
     it('step test', () => {
-        expect(mockState.step).toBe(1);
+        expect(mockState.step).toBe(initialState.step);
     });
 
     it('items test', () => {
-        expect(mockState.form.items.length).toBe(0);
+        expect(mockState.form.items.length).toBe(initialState.items.length);
     });
 });
 
 describe('mutations updateCheckbox test', () => {
-    const mockState = state(
-        1,
-        take(1, itemOptions)
-    );
-
+    const itemLength = 1;
+    const mockState = state(1, take(itemLength, itemOptions));
     const mockItems = {
         id: 2,
         value: 'checked test',
         checked: true,
     }
+    let index = null;
 
     mutations.updateCheckbox(mockState, mockItems);
+    index = mockState.form.items.length - 1;
 
     it('items length test', () => {
-        expect(mockState.form.items.length).toBe(2);
+        expect(index).toBe(itemLength);
     });
 
     it('items id test', () => {
-        expect(mockState.form.items[1].id).toBe(mockItems.id);
+        expect(mockState.form.items[index].id).toBe(mockItems.id);
     });
 
     it('items value test', () => {
-        expect(mockState.form.items[1].answer).toBe(mockItems.value);
+        expect(mockState.form.items[index].answer).toBe(mockItems.value);
     });
 });
 
 describe('mutations updateRadio test', () => {
-    const mockState = state(
-        2,
-        take(2, itemOptions)
-    );
-
+    const mockState = state(2, take(2, itemOptions));
     const mockItems = {
         id: 4,
         value: '1시간',
@@ -165,33 +180,30 @@ describe('mutations updateRadio test', () => {
         value: '2시간',
         checked: true,
     }
+    let index = null;
 
     mutations.updateCheckbox(mockState, mockItems);
     mutations.updateCheckbox(mockState, mockItems2);
+    index = mockState.form.items.length - 1;
 
     it('items id test', () => {
-        expect(mockState.form.items[2].id).toBe(mockItems2.id);
+        expect(mockState.form.items[index].id).toBe(mockItems2.id);
     });
 
     it('items value test', () => {
-        expect(mockState.form.items[2].answer).toBe(mockItems2.value);
+        expect(mockState.form.items[index].answer).toBe(mockItems2.value);
     });
 });
 
 describe('mutations updateText test', () => {
-    const mockState = state(
-        3,
-        take(3, itemOptions)
-    );
-
-    const mockItems = {
-        value: 'input text test'
-    }
+    const mockState = state(3, take(3, itemOptions));
+    const mockItems = { value: 'input text test' };
+    let index = null;
 
     mutations.updateText(mockState, mockItems);
+    index = mockState.form.items.length - 1;
 
     it('answer test', () => {
-        const index = mockState.form.items.length - 1;
         expect(mockState.form.items[index]).toEqual({ answer: mockItems.value });
     });
 });
@@ -199,18 +211,17 @@ describe('mutations updateText test', () => {
 describe('mutations updateSelect test', () => {
     const div = document.createElement('div');
     const selectbox = `<select name="selectbox" selected="selected"><option disabled="disabled" selected="selected">질문을 선택해 주세요</option> <option id="6">React 좋아하시나요?</option> <option id="7">Vue 좋아하시나요?</option> <option id="8">React VS Vue 과연 승자는?</option></select>`;
+    let mockState = mockState = state(4, take(3, itemOptions));;
     let items = null;
     let index = null;
-    let mockState = null;
 
-    div.innerHTML = selectbox;
-    items = div.querySelector('select');
-    mockState = state(
-        4,
-        take(3, itemOptions)
-    );
-
-    items.options.selectedIndex = 1;
+    const selectOption = () => {
+        div.innerHTML = selectbox;
+        items = div.querySelector('select');
+        items.options.selectedIndex = 1;
+    }
+    selectOption();
+    
     mutations.updateSelect(mockState, items);
     index = mockState.form.items.length - 1;
 
