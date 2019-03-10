@@ -110,16 +110,14 @@ describe('mutations exception test', () => {
 
 describe('mutations handleBack test', () => {
     let step = 4;
-    const mockState = state(step, take(4, itemOptions));
-    let lastSelectOptions = null;
+    const mockState = state(step, take(3, itemOptions));
 
     beforeEach(() => {
         while(--step > 0) mutations.handleBack(mockState);
     });
 
     it('step4 ~ step1 test', () => {
-        lastSelectOptions = Array(itemOptions[itemOptions.length - 1]);
-        expect(mockState.form.items).toEqual(lastSelectOptions);
+        expect(mockState).toEqual(state(1, []));
     });
 });
 
