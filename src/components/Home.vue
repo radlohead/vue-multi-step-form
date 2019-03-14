@@ -12,6 +12,10 @@
   </div>
 </template>
 
+<style>
+  @import '../css/components/Home.css';
+</style>
+
 <script>
 import Step1 from './Step1'
 import Step2 from './Step2'
@@ -20,7 +24,6 @@ import Step4 from './Step4'
 import Complete from './Complete'
 import StepMenu from './StepMenu'
 import input from '../assets/input'
-import '../css/components/Home.css'
 
 export default {
   name: 'Home',

@@ -18,9 +18,12 @@
   </section>
 </template>
 
+<style>
+  @import '../css/components/StepMenu.css';
+</style>
+
 <script>
 import input from '../assets/input'
-import '../css/components/StepMenu.css'
 
 export default {
   name: 'StepMenu',
