@@ -47,6 +47,7 @@ export default {
     }
 
     formIdDuplication(state, FORM_TYPE_NAME[RADIO])
+
     state.form.items.push({
       id: Number(items.id),
       answer: items.value

@@ -122,11 +122,13 @@ export const stepIncrement = (state) => {
 
 export const duplicateItems = (state, formTypeName) => {
   const step = formTypeId()[formTypeIndex(formTypeName)].text
-  const duplicateItems = step
-    .map(v => state.form.items.find(a => v === a.answer ? a : null))
-    .filter(v => { if (v) return v })
-  const deleteDuplicateItems = duplicateItems.map(v => state.form.items.filter(a => v.answer !== a.answer)).flat()
-  state.form.items = deleteDuplicateItems
+  const duplicateItems = step.map(v => state.form.items
+    .find(a => v === a.answer ? a : null))
+    .filter(v => v && v)
+  const deleteDuplicateItemsRest = duplicateItems.map(v => state.form.items
+    .filter(a => v.answer !== a.answer))
+    .flat()
+  state.form.items = deleteDuplicateItemsRest
 }
 
 export const duplicateTextItems = (state) => {
@@ -180,6 +182,7 @@ export const stepExceptionAlertAll = (step) => {
 
 export const optionsBlankItemId = () => {
   let optionsBlankItemId = []
+
   for (const obj of Array.from(input.items)) {
     if (!obj.options.length) optionsBlankItemId.push(obj.itemId)
   }
