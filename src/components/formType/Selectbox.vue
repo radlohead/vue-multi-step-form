@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import input from '@/assets/input'
+import store from '@/store'
 
 export default {
   name: 'Selectbox',
   data () {
     return {
-      options: input.items[3].options
+      options: store.state.input.items[3].options
     }
   },
   methods: {
