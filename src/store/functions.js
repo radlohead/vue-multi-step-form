@@ -130,7 +130,7 @@ export const duplicateItems = (state, formTypeName) => {
 }
 
 export const duplicateTextItems = (state) => {
-  const findIndex = state.form.items.findIndex(v => !v.id ? v : null)
+  const findIndex = state.form.items.findIndex(v => !v.id && v)
   state.form.items.splice(findIndex, 1)
 }
 
