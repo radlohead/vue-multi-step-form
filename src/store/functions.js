@@ -38,11 +38,8 @@ export const formOptionsId = () => {
 }
 
 export const handleException = (state) => {
-  let currentId = null
-
-  for (const obj of state.form.items) currentId = obj.id
   for (const obj of formOptionsId()) {
-    if (obj.itemId === state.step && obj.id !== currentId) {
+    if (obj.itemId === state.step) {
       stepExceptionAlertAll(state.step)
       return
     }
