@@ -17,13 +17,13 @@
 </style>
 
 <script>
+import store from '../store'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 import Step4 from './Step4'
 import Complete from './Complete'
 import StepMenu from './StepMenu'
-import input from '../assets/input'
 
 export default {
   name: 'Home',
@@ -37,7 +37,7 @@ export default {
   },
   data () {
     return {
-      title: input.title
+      title: store.state.input.title
     }
   },
   methods: {

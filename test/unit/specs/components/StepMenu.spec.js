@@ -13,6 +13,11 @@ describe('StepMenu describe', () => {
         store = new Vuex.Store({
             state: {
                 input
+            },
+            getters: {
+                firstStep(){},
+                lastStep(){},
+                secondToLastStep(){}
             }
         })
     });

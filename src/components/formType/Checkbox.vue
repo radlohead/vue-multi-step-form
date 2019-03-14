@@ -13,13 +13,11 @@
 </template>
 
 <script>
-import input from '../../assets/input'
-
 export default {
   name: 'Checkbox',
   data () {
     return {
-      options: input.items[0].options
+      options: this.$store.state.input.items[0].options
     }
   },
   methods: {

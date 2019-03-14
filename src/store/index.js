@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     }
   },
   getters: {
-    firstItemId (state) {
+    firstStep (state) {
       return state.input.items[0].itemId
     },
     lastStep (state) {

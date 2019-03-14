@@ -14,13 +14,11 @@
 </template>
 
 <script>
-import input from '../../assets/input'
-
 export default {
   name: 'Radio',
   data () {
     return {
-      options: input.items[1].options
+      options: this.$store.state.input.items[1].options
     }
   },
   methods: {

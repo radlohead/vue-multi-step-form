@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import store from '../store'
 import Selectbox from './formType/Selectbox'
 
 export default {
@@ -15,7 +16,7 @@ export default {
   },
   data () {
     return {
-      title: this.$store.state.input.items[3].title
+      title: store.state.input.items[3].title
     }
   }
 }

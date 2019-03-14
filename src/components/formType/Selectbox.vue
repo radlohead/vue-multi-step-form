@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import input from '../../assets/input'
+import input from '@/assets/input'
 
 export default {
   name: 'Selectbox',

@@ -15,7 +15,6 @@
       :disabled="$store.state.step !== lastStep"
       @click="handleRestart"
     >Restart</button>
-    {{ lastItemIndex }}
   </section>
 </template>
 
@@ -30,7 +29,7 @@ export default {
   name: 'StepMenu',
   computed: {
     ...mapGetters([
-      'firstItemId',
+      'firstStep',
       'lastStep',
       'secondToLastStep'
     ])
