@@ -125,8 +125,7 @@ export const duplicateItems = (state, formTypeName) => {
   const duplicateItems = step
     .map(v => state.form.items.find(a => v === a.answer ? a : null))
     .filter(v => { if (v) return v })
-  const items = state.form.items.map(v => duplicateItems.filter(a => v.answer === a.answer)).flat()
-  const deleteDuplicateItems = items.map(v => state.form.items.filter(a => v.answer !== a.answer)).flat()
+  const deleteDuplicateItems = duplicateItems.map(v => state.form.items.filter(a => v.answer !== a.answer)).flat()
   state.form.items = deleteDuplicateItems
 }
 
