@@ -9,7 +9,6 @@ import {
   STEP3,
   STEP4,
   FORM_ITEM_ID,
-  formOptionsNotId,
   stepExceptionAlertMessage
 } from './constants'
 
@@ -34,7 +33,7 @@ export const formOptionsId = () => {
       })
     }
   }
-  optionsNotId(optionsId, formOptionsNotId)
+  optionsNotId(optionsId, optionsBlankItemId())
   return optionsId
 }
 

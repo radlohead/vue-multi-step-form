@@ -1,5 +1,3 @@
-import { optionsBlankItemId } from './functions'
-
 export const CHECKBOX = 'CHECKBOX'
 export const RADIO = 'RADIO'
 export const TEXT = 'TEXT'
@@ -30,5 +28,3 @@ export const stepExceptionAlertMessage = {
   TEXT: '원하는 청소 스타일을 추가로 입력해 주세요.',
   SELECTBOX: '네번째 질문을 선택해 주세요.'
 }
-
-export const formOptionsNotId = optionsBlankItemId()
