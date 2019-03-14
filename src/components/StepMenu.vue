@@ -15,6 +15,7 @@
       :disabled="$store.state.step !== lastStep"
       @click="handleRestart"
     >Restart</button>
+    {{ lastItemIndex }}
   </section>
 </template>
 
@@ -23,16 +24,16 @@
 </style>
 
 <script>
-import input from '../assets/input'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'StepMenu',
-  data () {
-    return {
-      firstStep: input.items[0].itemId,
-      lastStep: input.items[input.items.length - 1].itemId + 1,
-      secondToLastStep: input.items[input.items.length - 1].itemId
-    }
+  computed: {
+    ...mapGetters([
+      'firstItemId',
+      'lastStep',
+      'secondToLastStep'
+    ])
   },
   methods: {
     handleNext (e) {

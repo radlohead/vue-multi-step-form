@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import StepMenu from '@/components/StepMenu';
+import input from '@/assets/input';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -10,7 +11,9 @@ describe('StepMenu describe', () => {
 
     beforeEach(() => {
         store = new Vuex.Store({
-            state: {}
+            state: {
+                input
+            }
         })
     });
 
