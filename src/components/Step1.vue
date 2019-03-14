@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import input from '../assets/input'
 import Checkbox from './formType/Checkbox'
 
 export default {
@@ -16,7 +15,7 @@ export default {
   },
   data () {
     return {
-      title: input.items[0].title
+      title: this.$store.state.input.items[0].title
     }
   }
 }

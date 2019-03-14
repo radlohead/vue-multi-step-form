@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    input: input,
     step: 1,
     form: {
       id: input.formId,
