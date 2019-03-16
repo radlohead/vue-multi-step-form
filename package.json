@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "array-flat-polyfill": "^1.0.0",
     "vue": "^2.5.2",
     "vuex": "^3.1.0"
   },
@@ -78,5 +79,13 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "jest": {
+    "preset": "jest",
+    "globals": {
+      "jest": {
+        "babelConfig": true
+      }
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'array-flat-polyfill';
 import Vue from 'vue';
 import mutations from '@/store/mutations';
 import input from '@/assets/input';
