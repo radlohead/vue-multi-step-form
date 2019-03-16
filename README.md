@@ -4,7 +4,7 @@
 
 ## 실행
 
-    npm start 또는 yarn start 를 입력하면 과제가 localhost:3000포트에서 실행됩니다.
+    npm start 또는 yarn start 를 입력하면 localhost:3000포트에서 실행됩니다.
 
 ## 테스트 실행
 
