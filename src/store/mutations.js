@@ -5,6 +5,7 @@ import {
   formTypeIndex,
   formIdDuplication,
   stepIncrement,
+  currentDuplicateItemsRemove,
   duplicateItemsStepAll
 } from './functions'
 
@@ -15,6 +16,7 @@ export default {
   },
   handleBack (state) {
     state.step -= 1
+    currentDuplicateItemsRemove(state)
     duplicateItemsStepAll(state)
   },
   handleRestart (state) {

@@ -120,6 +120,22 @@ export const stepIncrement = (state) => {
   }
 }
 
+export const currentDuplicateItemsRemove = (state) => {
+  const step = formTypeId()[state.step].text
+  if (!step.length) return
+
+  const duplicateItems = step.map(v => state.form.items
+    .find(a => v === a.answer ? a : null))
+    .filter(v => v && v)
+  const deleteDuplicateItemsRest = duplicateItems.map(v => state.form.items
+    .filter(a => v.answer !== a.answer))
+    .flat()
+    .sort((a, b) => a.id - b.id)
+
+  if (!deleteDuplicateItemsRest.length) return
+  state.form.items = deleteDuplicateItemsRest
+}
+
 export const duplicateItems = (state, formTypeName) => {
   const step = formTypeId()[formTypeIndex(formTypeName)].text
   const duplicateItems = step.map(v => state.form.items
@@ -128,7 +144,9 @@ export const duplicateItems = (state, formTypeName) => {
   const deleteDuplicateItemsRest = duplicateItems.map(v => state.form.items
     .filter(a => v.answer !== a.answer))
     .flat()
+
   state.form.items = deleteDuplicateItemsRest
+  if (state.step <= 2) duplicateTextItems(state)
 }
 
 export const duplicateTextItems = (state) => {
