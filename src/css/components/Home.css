@@ -1,13 +1,23 @@
 @import '../Common.css';
 
 .home {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
     max-width: 500px;
     margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #bdbdbd;
 }
 
 .main {
     padding: 20px;
     border: 1px solid #bdbdbd;
+}
+
+.home__title {
+    margin-bottom: 15px;
 }
 
 h2 {

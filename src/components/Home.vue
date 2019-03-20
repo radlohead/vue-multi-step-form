@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>{{ title }}</h1>
+    <h1 class="home__title">{{ title }}</h1>
     <section class="main">
       <Step1 v-if="step() === 1"/>
       <Step2 v-if="step() === 2"/>
