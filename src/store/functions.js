@@ -12,7 +12,7 @@ import {
   stepExceptionAlertMessage
 } from './constants'
 
-export const optionsNotId = (optionsId, arrNum) => {
+const optionsNotId = (optionsId, arrNum) => {
   for (const num of arrNum) {
     optionsId.push({
       itemId: num,
@@ -22,7 +22,7 @@ export const optionsNotId = (optionsId, arrNum) => {
   return optionsId
 }
 
-export const formOptionsId = () => {
+const formOptionsId = () => {
   let optionsId = []
 
   for (const obj of Array.from(input.items)) {
@@ -37,7 +37,7 @@ export const formOptionsId = () => {
   return optionsId
 }
 
-export const handleException = (state) => {
+const handleException = (state) => {
   for (const obj of formOptionsId()) {
     if (obj.itemId === state.step) {
       stepExceptionAlertAll(state.step)
@@ -46,7 +46,7 @@ export const handleException = (state) => {
   }
 }
 
-export const handleSubmit = (state) => {
+const handleSubmit = (state) => {
   const submitStep = input.items.length + 1
 
   if (state.step === submitStep) {
@@ -57,7 +57,7 @@ export const handleSubmit = (state) => {
   }
 }
 
-export const answerCheck = (state, formTypeNum, answerCheckIndex) => {
+const answerCheck = (state, formTypeNum, answerCheckIndex) => {
   const cleanTimeTextArr = input.items[answerCheckIndex].options.map(v => v.text)
   const cleanTimeFilter = state.form.items.some(v => cleanTimeTextArr.some(a => a === v.answer))
 
@@ -65,7 +65,7 @@ export const answerCheck = (state, formTypeNum, answerCheckIndex) => {
   return !cleanTimeFilter
 }
 
-export const formTypeId = () => {
+const formTypeId = () => {
   let result = []
   for (const obj of Array.from(input.items)) {
     let optionsId = []
@@ -83,12 +83,12 @@ export const formTypeId = () => {
   return result
 }
 
-export const formTypeIndex = (typeName) => {
+const formTypeIndex = (typeName) => {
   const findIndex = formTypeId().findIndex(v => v.formType === FORM_TYPE_NAME[typeName])
   return findIndex
 }
 
-export const formIdDuplication = (state, formTypeName) => {
+const formIdDuplication = (state, formTypeName) => {
   let exceptionText = []
 
   for (const obj of input.items) {
@@ -106,7 +106,7 @@ export const formIdDuplication = (state, formTypeName) => {
   return state
 }
 
-export const stepIncrement = (state) => {
+const stepIncrement = (state) => {
   let currentId = null
 
   for (const obj of state.form.items) currentId = obj.id
@@ -120,7 +120,7 @@ export const stepIncrement = (state) => {
   }
 }
 
-export const currentDuplicateItemsRemove = (state) => {
+const currentDuplicateItemsRemove = (state) => {
   const step = formTypeId()[state.step].text
   if (!step.length) return
 
@@ -136,7 +136,7 @@ export const currentDuplicateItemsRemove = (state) => {
   state.form.items = deleteDuplicateItemsRest
 }
 
-export const duplicateItems = (state, formTypeName) => {
+const duplicateItems = (state, formTypeName) => {
   const step = formTypeId()[formTypeIndex(formTypeName)].text
   const duplicateItems = step.map(v => state.form.items
     .find(a => v === a.answer ? a : null))
@@ -149,12 +149,12 @@ export const duplicateItems = (state, formTypeName) => {
   if (state.step <= 2) duplicateTextItems(state)
 }
 
-export const duplicateTextItems = (state) => {
+const duplicateTextItems = (state) => {
   const textFindIndex = state.form.items.findIndex(v => !v.id && v)
   state.form.items.splice(textFindIndex, 1)
 }
 
-export const duplicateItemsStep = {
+const duplicateItemsStep = {
   STEP1: (state) => {
     if (state.step === FORM_ITEM_ID[STEP1]) duplicateItems(state, CHECKBOX)
   },
@@ -169,14 +169,14 @@ export const duplicateItemsStep = {
   }
 }
 
-export const duplicateItemsStepAll = (state) => {
+const duplicateItemsStepAll = (state) => {
   duplicateItemsStep[STEP1](state)
   duplicateItemsStep[STEP2](state)
   duplicateItemsStep[STEP3](state)
   duplicateItemsStep[STEP4](state)
 }
 
-export const stepExceptionAlert = {
+const stepExceptionAlert = {
   STEP1: (step) => {
     if (step === FORM_ITEM_ID[STEP1]) alert(stepExceptionAlertMessage.CHECKBOX)
   },
@@ -191,18 +191,38 @@ export const stepExceptionAlert = {
   }
 }
 
-export const stepExceptionAlertAll = (step) => {
+const stepExceptionAlertAll = (step) => {
   stepExceptionAlert[STEP1](step)
   stepExceptionAlert[STEP2](step)
   stepExceptionAlert[STEP3](step)
   stepExceptionAlert[STEP4](step)
 }
 
-export const optionsBlankItemId = () => {
+const optionsBlankItemId = () => {
   let optionsBlankItemId = []
 
   for (const obj of Array.from(input.items)) {
     if (!obj.options.length) optionsBlankItemId.push(obj.itemId)
   }
   return optionsBlankItemId
+}
+
+export {
+  optionsNotId,
+  formOptionsId,
+  handleException,
+  handleSubmit,
+  answerCheck,
+  formTypeId,
+  formTypeIndex,
+  formIdDuplication,
+  stepIncrement,
+  currentDuplicateItemsRemove,
+  duplicateItems,
+  duplicateTextItems,
+  duplicateItemsStep,
+  duplicateItemsStepAll,
+  stepExceptionAlert,
+  stepExceptionAlertAll,
+  optionsBlankItemId
 }
