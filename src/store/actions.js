@@ -10,5 +10,14 @@ export default {
   },
   updateSelect ({ commit }, state) {
     commit('updateSelect', state)
+  },
+  handleNext ({ commit }) {
+    commit('handleNext')
+  },
+  handleBack ({ commit }) {
+    commit('handleBack')
+  },
+  handleRestart ({ commit }) {
+    commit('handleRestart')
   }
 }

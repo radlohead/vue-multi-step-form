@@ -23,7 +23,7 @@
 </style>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'StepMenu',
@@ -35,15 +35,11 @@ export default {
     ])
   },
   methods: {
-    handleNext (e) {
-      this.$store.commit('handleNext')
-    },
-    handleBack (e) {
-      this.$store.commit('handleBack')
-    },
-    handleRestart (e) {
-      this.$store.commit('handleRestart')
-    }
+    ...mapActions([
+      'handleNext',
+      'handleBack',
+      'handleRestart'
+    ])
   }
 }
 </script>
