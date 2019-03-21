@@ -9,7 +9,7 @@ import {
   STEP3,
   STEP4,
   FORM_ITEM_ID,
-  stepExceptionAlertMessage
+  STEP_EXCEPTION_ALERT_MESSAGE
 } from './constants'
 
 const optionsNotId = (optionsId, arrNum) => {
@@ -178,16 +178,16 @@ const duplicateItemsStepAll = (state) => {
 
 const stepExceptionAlert = {
   STEP1: (step) => {
-    if (step === FORM_ITEM_ID[STEP1]) alert(stepExceptionAlertMessage.CHECKBOX)
+    if (step === FORM_ITEM_ID[STEP1]) alert(STEP_EXCEPTION_ALERT_MESSAGE.CHECKBOX)
   },
   STEP2: (step) => {
-    if (step === FORM_ITEM_ID[STEP2]) alert(stepExceptionAlertMessage.RADIO)
+    if (step === FORM_ITEM_ID[STEP2]) alert(STEP_EXCEPTION_ALERT_MESSAGE.RADIO)
   },
   STEP3: (step) => {
-    if (step === FORM_ITEM_ID[STEP3]) alert(stepExceptionAlertMessage.TEXT)
+    if (step === FORM_ITEM_ID[STEP3]) alert(STEP_EXCEPTION_ALERT_MESSAGE.TEXT)
   },
   STEP4: (step) => {
-    if (step === FORM_ITEM_ID[STEP4]) alert(stepExceptionAlertMessage.SELECTBOX)
+    if (step === FORM_ITEM_ID[STEP4]) alert(STEP_EXCEPTION_ALERT_MESSAGE.SELECTBOX)
   }
 }
 

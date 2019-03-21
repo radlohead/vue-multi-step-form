@@ -22,7 +22,7 @@ const FORM_ITEM_ID = {
   STEP4: 4
 }
 
-const stepExceptionAlertMessage = {
+const STEP_EXCEPTION_ALERT_MESSAGE = {
   CHECKBOX: '청소 스타일을 체크해 주세요.',
   RADIO: '청소 시간을 체크해 주세요.',
   TEXT: '원하는 청소 스타일을 추가로 입력해 주세요.',
@@ -40,5 +40,5 @@ export {
   STEP3,
   STEP4,
   FORM_ITEM_ID,
-  stepExceptionAlertMessage
+  STEP_EXCEPTION_ALERT_MESSAGE
 }
