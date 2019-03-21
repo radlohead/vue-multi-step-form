@@ -24,6 +24,9 @@ const store = new Vuex.Store({
     },
     secondToLastStep (state) {
       return state.input.items[state.input.items.length - 1].itemId
+    },
+    step (state) {
+      return state.step
     }
   },
   actions,

@@ -17,6 +17,7 @@
 </style>
 
 <script>
+import { mapGetters } from 'vuex'
 import store from '../store'
 import Step1 from './Step1'
 import Step2 from './Step2'
@@ -41,9 +42,9 @@ export default {
     }
   },
   methods: {
-    step () {
-      return this.$store.state.step
-    }
+    ...mapGetters([
+      'step'
+    ])
   }
 }
 </script>
