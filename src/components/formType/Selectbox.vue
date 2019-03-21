@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     updateSelect (e) {
-      this.$store.commit('updateSelect', e.target)
+      this.$store.dispatch('updateSelect', e.target)
     }
   }
 }

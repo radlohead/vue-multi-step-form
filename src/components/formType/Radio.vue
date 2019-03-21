@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     updateRadio (e) {
-      this.$store.commit('updateRadio', e.target)
+      this.$store.dispatch('updateRadio', e.target)
     }
   }
 }

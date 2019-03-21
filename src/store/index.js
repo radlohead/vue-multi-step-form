@@ -26,8 +26,8 @@ const store = new Vuex.Store({
       return state.input.items[state.input.items.length - 1].itemId
     }
   },
-  mutations,
-  actions
+  actions,
+  mutations
 })
 
 export default store

@@ -10,7 +10,7 @@ export default {
   name: 'InputText',
   methods: {
     updateText (e) {
-      this.$store.commit('updateText', e.target)
+      this.$store.dispatch('updateText', e.target)
     }
   }
 }

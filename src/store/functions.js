@@ -115,6 +115,7 @@ const stepIncrement = (state) => {
       if (answerCheck(state, FORM_ITEM_ID[STEP2], FORM_ITEM_ID[STEP1])) return
       state.step = obj.itemId + 1
       handleSubmit(state)
+      console.log(JSON.parse(JSON.stringify(state.form.items)))
       return true
     }
   }
