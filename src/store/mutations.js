@@ -1,4 +1,4 @@
-import { RADIO, SELECTBOX, FORM_TYPE_NAME } from './constants'
+import { RADIO, SELECTBOX, FORM_TYPE_NAME } from './actions'
 import {
   handleException,
   formTypeId,

@@ -9,8 +9,8 @@ import {
     STEP3,
     STEP4,
     FORM_ITEM_ID,
-    stepExceptionAlertMessage
-} from '@/store/constants';
+    STEP_EXCEPTION_ALERT_MESSAGE
+} from '@/store/actions';
 
 describe('constants formType test', () => {
     const mockFormType = {
@@ -99,7 +99,7 @@ describe('constants FORM_ITEM_ID test', () => {
     });
 });
 
-describe('stepExceptionAlertMessage test', () => {
+describe('STEP_EXCEPTION_ALERT_MESSAGE test', () => {
     const mockStepExceptionAlertMessage = {
         CHECKBOX: '청소 스타일을 체크해 주세요.',
         RADIO: '청소 시간을 체크해 주세요.',
@@ -108,15 +108,15 @@ describe('stepExceptionAlertMessage test', () => {
     }
     
     it('checkbox alert message', () => {
-        expect(stepExceptionAlertMessage[CHECKBOX]).toBe('청소 스타일을 체크해 주세요.');
+        expect(STEP_EXCEPTION_ALERT_MESSAGE[CHECKBOX]).toBe('청소 스타일을 체크해 주세요.');
     });
     it('radio alert message', () => {
-        expect(stepExceptionAlertMessage[RADIO]).toBe('청소 시간을 체크해 주세요.');
+        expect(STEP_EXCEPTION_ALERT_MESSAGE[RADIO]).toBe('청소 시간을 체크해 주세요.');
     });
     it('text alert message', () => {
-        expect(stepExceptionAlertMessage[TEXT]).toBe('원하는 청소 스타일을 추가로 입력해 주세요.');
+        expect(STEP_EXCEPTION_ALERT_MESSAGE[TEXT]).toBe('원하는 청소 스타일을 추가로 입력해 주세요.');
     });
     it('selectbox alert message', () => {
-        expect(stepExceptionAlertMessage[SELECTBOX]).toBe('네번째 질문을 선택해 주세요.');
+        expect(STEP_EXCEPTION_ALERT_MESSAGE[SELECTBOX]).toBe('네번째 질문을 선택해 주세요.');
     });
 });

@@ -10,7 +10,7 @@ import {
   STEP4,
   FORM_ITEM_ID,
   STEP_EXCEPTION_ALERT_MESSAGE
-} from './constants'
+} from './actions'
 
 const optionsNotId = (optionsId, arrNum) => {
   for (const num of arrNum) {
