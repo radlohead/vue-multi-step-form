@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     updateCheckbox (e) {
-      this.$store.commit('updateCheckbox', e.target)
+      this.$store.dispatch('updateCheckbox', e.target)
     }
   }
 }

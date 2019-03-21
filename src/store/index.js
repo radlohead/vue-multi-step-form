@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import input from '../assets/input'
 import mutations from './mutations'
+import actions from './actions'
 
 Vue.use(Vuex)
 
@@ -25,7 +26,8 @@ const store = new Vuex.Store({
       return state.input.items[state.input.items.length - 1].itemId
     }
   },
-  mutations
+  mutations,
+  actions
 })
 
 export default store
