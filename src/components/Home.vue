@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="home__title">{{ title }}</h1>
+    <h1 class="home__title">{{ homeTitle() }}</h1>
     <section class="main">
       <Step1 v-if="step() === 1"/>
       <Step2 v-if="step() === 2"/>
@@ -18,7 +18,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import store from '../store'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
@@ -36,13 +35,9 @@ export default {
     Complete,
     StepMenu
   },
-  data () {
-    return {
-      title: store.state.input.title
-    }
-  },
   methods: {
     ...mapGetters([
+      'homeTitle',
       'step'
     ])
   }

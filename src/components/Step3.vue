@@ -1,11 +1,12 @@
 <template>
   <section>
-    <h2>{{ title }}</h2>
+    <h2>{{ step3Title() }}</h2>
     <InputText/>
   </section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import InputText from './formType/Text'
 
 export default {
@@ -13,10 +14,10 @@ export default {
   components: {
     InputText
   },
-  data () {
-    return {
-      title: this.$store.state.input.items[2].title
-    }
+  methods: {
+    ...mapGetters([
+      'step3Title'
+    ])
   }
 }
 </script>

@@ -1,11 +1,12 @@
 <template>
   <section>
-    <h2>{{ title }}</h2>
+    <h2>{{ step2Title() }}</h2>
     <Radio/>
   </section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Radio from './formType/Radio'
 
 export default {
@@ -13,10 +14,10 @@ export default {
   components: {
     Radio
   },
-  data () {
-    return {
-      title: this.$store.state.input.items[1].title
-    }
+  methods: {
+    ...mapGetters([
+      'step2Title'
+    ])
   }
 }
 </script>

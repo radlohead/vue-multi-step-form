@@ -1,12 +1,12 @@
 <template>
   <section>
-    <h2>{{ title }}</h2>
+    <h2>{{ step4Title() }}</h2>
     <Selectbox/>
   </section>
 </template>
 
 <script>
-import store from '../store'
+import { mapGetters } from 'vuex'
 import Selectbox from './formType/Selectbox'
 
 export default {
@@ -14,10 +14,10 @@ export default {
   components: {
     Selectbox
   },
-  data () {
-    return {
-      title: store.state.input.items[3].title
-    }
+  methods: {
+    ...mapGetters([
+      'step4Title'
+    ])
   }
 }
 </script>

@@ -1,11 +1,12 @@
 <template>
   <section>
-    <h2>{{ title }}</h2>
+    <h2>{{ step1Title() }}</h2>
     <Checkbox/>
   </section>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Checkbox from './formType/Checkbox'
 
 export default {
@@ -13,10 +14,10 @@ export default {
   components: {
     Checkbox
   },
-  data () {
-    return {
-      title: this.$store.state.input.items[0].title
-    }
+  methods: {
+    ...mapGetters([
+      'step1Title'
+    ])
   }
 }
 </script>
