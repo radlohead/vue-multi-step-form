@@ -1,11 +1,10 @@
 import 'array-flat-polyfill';
-import Vue from 'vue';
+import { shallow } from 'vue-test-utils';
 import mutations from '@/store/mutations';
 import input from '@/assets/input';
 import { items as itemOptions } from '@/assets/output';
 import { alertMessage } from '../../setup';
-import Step4 from '@/components/Step4';
-import Selectbox from '@/components/formType/Selectbox';
+import Selectbox from '@/components/formType/Selectbox.vue';
 
 const state = (stepCount, options) => {
     return {
@@ -209,16 +208,15 @@ describe('mutations updateText test', () => {
 });
 
 describe('mutations updateSelectbox test', () => {
-    const Constructor = Vue.extend(Selectbox);
-    const vm = new Constructor().$mount();
-    let mockState = mockState = state(4, take(3, itemOptions));;
-    let items = vm.$el.querySelector('select');;
+    const wrapper = shallow(Selectbox);
+    let mockState = state(4, take(3, itemOptions));
+    let items = wrapper.find('select').element;
     let index = null;
-    
+
     it('selected option id', () => {
         const selectedIndex = 1;
-        console.log('seletedItemOptionId: ', items);
         const seletedItemOptionId = Number(items.options[selectedIndex].id);
+
         items.options.selectedIndex = selectedIndex;
         mutations.updateSelect(mockState, items);
         index = mockState.form.items.length - 1;
