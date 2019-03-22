@@ -11,9 +11,10 @@ describe('Step3 describe', () => {
 
     beforeEach(() => {
         store = new Vuex.Store({
-            state: {
-                input
-            }
+            state: {},
+            getters: {
+				step3Title(){}
+			}
         })
     });
 

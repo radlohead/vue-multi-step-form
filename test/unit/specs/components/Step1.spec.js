@@ -1,7 +1,6 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue, } from '@vue/test-utils';
 import Step1 from '@/components/Step1';
-import input from '@/assets/input';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -11,8 +10,9 @@ describe('Step1 describe', () => {
 
 	beforeEach(() => {
 		store = new Vuex.Store({
-			state: {
-				input
+			state: {},
+			getters: {
+				step1Title(){}
 			}
 		})
 	});

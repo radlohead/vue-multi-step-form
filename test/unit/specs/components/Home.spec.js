@@ -10,7 +10,11 @@ describe('Home describe', () => {
     
     beforeEach(() => {
         store = new Vuex.Store({
-            state: {}
+            state: {},
+            getters: {
+                homeTitle(){},
+                step(){}
+            }
         })
     });
 
