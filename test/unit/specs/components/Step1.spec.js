@@ -19,6 +19,7 @@ describe('Step1 describe', () => {
 
 	it('Step1 test', () => {
 		const wrapper = shallowMount(Step1, { store, localVue });
-		expect(wrapper.isVueInstance()).toBeTruthy();
+		// expect(wrapper.isVueInstance()).toBeTruthy();
+		expect(wrapper.isVueInstance()).toBeFalsy();
 	});
 });
